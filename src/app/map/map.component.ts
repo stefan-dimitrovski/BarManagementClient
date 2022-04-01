@@ -3,11 +3,14 @@ import * as L from 'leaflet';
 import { LocaleService } from '../locale.service';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
-// const iconUrl = 'assets/marker-icon.png';
 const iconUrl =
-    'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png';
+    'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png';
+
 const shadowUrl = 'assets/marker-shadow.png';
-const iconDefault = L.icon({
+
+const iconDefault = L.divIcon({
+    html: `<a href="#"><img src=${iconUrl} /></a>`,
+    className: '',
     iconRetinaUrl,
     iconUrl,
     shadowUrl,
@@ -17,7 +20,6 @@ const iconDefault = L.icon({
     tooltipAnchor: [16, -28],
     shadowSize: [41, 41],
 });
-L.Marker.prototype.options.icon = iconDefault;
 
 @Component({
     selector: 'app-map',
@@ -34,14 +36,9 @@ export class MapComponent implements AfterViewInit {
         this.localeService.getLocales(this.map!!).subscribe({
             next: (data) => {
                 data.forEach((l) => {
-                    const customIcon = L.divIcon({
-                        html: `<a href="#"><img src="${iconUrl}" /></a>`,
-                        className: '',
-                    });
                     const marker = L.marker([l.lat, l.lng], {
-                        icon: customIcon,
+                        icon: iconDefault,
                     });
-
                     marker.addTo(this.map!!);
                 });
             },
