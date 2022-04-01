@@ -1,6 +1,7 @@
 import {Component, AfterViewInit} from '@angular/core';
 import * as L from 'leaflet';
 import {LocaleService} from '../locale.service';
+import {Locale} from "../domain/locale";
 
 const iconDefault = L.icon({
     iconUrl: 'assets/marker-icon-red.png',
@@ -17,23 +18,26 @@ const iconDefault = L.icon({
 })
 export class MapComponent implements AfterViewInit {
     map: L.Map | null = null;
+    locales: Locale[] = [];
 
     constructor(private localeService: LocaleService) {}
 
     ngAfterViewInit(): void {
         this.initMap();
-        this.localeService.getLocales(this.map!!).subscribe({
-            next: (data) => {
-                data.forEach((l) => {
+        this.localeService.getLocales()
+            .subscribe({
+                next: (data) => {
+                    this.locales = data;
 
-                    const marker = L.marker([l.lat, l.lng], {
-                        icon: iconDefault,
+                    data.forEach((l) => {
+                        const marker = L.marker([l.lat, l.lng], {
+                            icon: iconDefault,
+                        });
+
+                        marker.addTo(this.map!!)
                     });
-
-                    marker.addTo(this.map!!)
-                });
-            },
-        });
+                },
+            });
     }
 
     initMap(): void {

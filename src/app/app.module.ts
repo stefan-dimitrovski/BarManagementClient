@@ -7,15 +7,20 @@ import {AppComponent} from './app.component';
 import {ButtonModule} from 'primeng/button';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MapComponent} from './map/map.component';
+import {LocalesListComponent} from './map/locales-list/locales-list.component';
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import {CardModule} from 'primeng/card';
 
 @NgModule({
-    declarations: [AppComponent, MapComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent],
     imports: [
         HttpClientModule,
         BrowserModule,
         ButtonModule,
         NgbModule,
         AppRoutingModule,
+        VirtualScrollerModule,
+        CardModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

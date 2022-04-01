@@ -1,4 +1,4 @@
-export interface Table {
+export interface Locale {
     id: number;
     address: string;
     name: string;

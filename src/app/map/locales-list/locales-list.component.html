@@ -1,0 +1,21 @@
+<div id="scroller">
+  <p-virtualScroller [value]="locales" scrollHeight="500px" [itemSize]="100">
+    <ng-template pTemplate="header">
+      <div class="flex align-items-center justify-content-center">
+        Locales
+      </div>
+    </ng-template>
+    <ng-template let-locale pTemplate="item" let-i="index">
+      <a routerLink="/details/{{ locale.id }}" class="locale">
+        <div class="card mt-2 locale-div">
+          <div class="card-title m-lg-2">
+            {{ locale.name }}
+          </div>
+          <div class="card-body">
+            {{ locale.address }}
+          </div>
+        </div>
+      </a>
+    </ng-template>
+  </p-virtualScroller>
+</div>
