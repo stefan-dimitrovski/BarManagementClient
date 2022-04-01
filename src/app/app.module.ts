@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MapComponent } from './map/map.component';
+import { TablesComponent } from './tables/tables.component';
 
 @NgModule({
-    declarations: [AppComponent, MapComponent],
+    declarations: [AppComponent, MapComponent, TablesComponent],
     imports: [
         HttpClientModule,
         BrowserModule,
