@@ -1,5 +1,23 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import { LocaleService } from '../locale.service';
+
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+// const iconUrl = 'assets/marker-icon.png';
+const iconUrl =
+    'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png';
+const shadowUrl = 'assets/marker-shadow.png';
+const iconDefault = L.icon({
+    iconRetinaUrl,
+    iconUrl,
+    shadowUrl,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+    shadowSize: [41, 41],
+});
+L.Marker.prototype.options.icon = iconDefault;
 
 @Component({
     selector: 'app-map',
@@ -7,9 +25,26 @@ import * as L from 'leaflet';
     styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements AfterViewInit {
-    private map: L.Map | undefined;
+    map: L.Map | null = null;
 
-    private initMap(): void {
+    constructor(private localeService: LocaleService) {}
+
+    ngAfterViewInit(): void {
+        this.initMap();
+        this.localeService.getLocales(this.map!!).subscribe({
+            next: (data) => {
+                for (const l of data) {
+                    const lat = l.lat;
+                    const lng = l.lng;
+                    const marker = L.marker([lat, lng]);
+
+                    marker.addTo(this.map!!);
+                }
+            },
+        });
+    }
+
+    initMap(): void {
         this.map = L.map('map', {
             center: [41.6086, 21.7453],
             zoom: 9,
@@ -25,11 +60,5 @@ export class MapComponent implements AfterViewInit {
             }
         );
         tiles.addTo(this.map);
-    }
-
-    constructor() {}
-
-    ngAfterViewInit(): void {
-        this.initMap();
     }
 }
