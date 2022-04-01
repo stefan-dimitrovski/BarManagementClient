@@ -13,9 +13,9 @@ import { MapComponent } from './map/map.component';
     imports: [
         HttpClientModule,
         BrowserModule,
-        AppRoutingModule,
         ButtonModule,
         NgbModule,
+        AppRoutingModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
