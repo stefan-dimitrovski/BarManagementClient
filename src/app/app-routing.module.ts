@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {MapComponent} from "./map/map.component";
 
 const routes: Routes = [
-    {path: 'locale/:id', component: MapComponent}
+    {path: 'locales', component: MapComponent},
 ];
 
 @NgModule({
