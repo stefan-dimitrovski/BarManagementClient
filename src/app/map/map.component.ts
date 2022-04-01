@@ -33,13 +33,17 @@ export class MapComponent implements AfterViewInit {
         this.initMap();
         this.localeService.getLocales(this.map!!).subscribe({
             next: (data) => {
-                for (const l of data) {
-                    const lat = l.lat;
-                    const lng = l.lng;
-                    const marker = L.marker([lat, lng]);
+                data.forEach((l) => {
+                    const customIcon = L.divIcon({
+                        html: `<a href="#"><img src="${iconUrl}" /></a>`,
+                        className: '',
+                    });
+                    const marker = L.marker([l.lat, l.lng], {
+                        icon: customIcon,
+                    });
 
                     marker.addTo(this.map!!);
-                }
+                });
             },
         });
     }
