@@ -14,4 +14,8 @@ export class TableService {
   getTables(): Observable<Table[]> {
     return this.http.get<Table[]>(`${environment.server}/tables`)
   }
+
+  getTableById(id: number): Observable<Table> {
+    return this.http.get<Table>(`${environment.server}/tables/${id}`)
+  }
 }

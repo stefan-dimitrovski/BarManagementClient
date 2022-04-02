@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Table } from '../domain/table';
 import { TableService } from '../table.service';
@@ -12,15 +11,24 @@ import { TableService } from '../table.service';
 })
 export class TablesComponent implements OnInit {
 
+  tables: Table[] | undefined;
   tables$: Observable<Table[]> = this.tableService.getTables();
 
 
   constructor(
     private tableService: TableService,
-    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.tables$.subscribe({
+      next: (data) => {
+        this.tables = data
+        console.log(this.tables)
+      },
+      error: err => {
+        console.log('ERROR', err);
+      }
+    });
   }
 
 

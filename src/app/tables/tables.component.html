@@ -1,7 +1,12 @@
-<div id="bg-layout" class="container">
-    <div id="t1">
-        <a href="#">
-            <p-badge value="A1" severity="success" size="large" styleClass="p-mr-2"></p-badge>
-        </a>
+<div id="bg-layout" class="container-lg">
+    <div *ngFor="let table of tables">
+        <div id="t1">
+            <a routerLink="/tables/{{table.id}}">
+                <p-badge value="T{{table.id}}" severity="success" size="large" styleClass="p-mr-2" pTooltip="
+                Availability: {{table.isOpen}}
+                Served by: {{table.waiter.name}}
+                " tooltipPosition="top"></p-badge>
+            </a>
+        </div>
     </div>
 </div>
