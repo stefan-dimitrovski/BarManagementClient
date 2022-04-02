@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { Table } from './domain/table';
+import { Locale } from './domain/locale';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,9 +10,9 @@ import { environment } from 'src/environments/environment';
 export class LocaleService {
     constructor(private http: HttpClient) {}
 
-    getLocales(map: L.Map): Observable<Table[]> {
+    getLocales(map: L.Map): Observable<Locale[]> {
         return this.http
-            .get<Table[]>(`${environment.server}/locales`)
+            .get<Locale[]>(`${environment.server}/locales`)
             .pipe(tap((data) => console.log(data)));
     }
 }
