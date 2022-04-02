@@ -1,7 +1,6 @@
 #bg-layout {
-    position: relative;
-    background-image: url(../../assets/images/tables-layout.png);
-    transform: scale(60%);
+    background-image: url(../../assets/images/bar-layout.jpg);
+    transform: scale(70%);
     height: 1000px;
     width: auto;
     background-size: cover;
@@ -9,8 +8,86 @@
 
 #t1{
     position: absolute;
-    bottom: 37%;
-    left: 8%;
+    bottom: 34.5%;
+    left: 9.5%;
+}
+
+#t2{
+    position: absolute;
+    bottom: 49%;
+    left: 9.5%;
+}
+
+#t3{
+    position: absolute;
+    bottom: 67%;
+    left: 9.5%;
+}
+
+#t4{
+    position: absolute;
+    top: 13%;
+    left: 13%;
+}
+
+#t5{
+    position: absolute;
+    top: 13%;
+    left: 26%;
+}
+
+#t6{
+    position: absolute;
+    top: 9.5%;
+    left: 53%;
+}
+
+#t7{
+    position: absolute;
+    top: 20.5%;
+    left: 53%;
+}
+
+#t8{
+    position: absolute;
+    top: 15%;
+    left: 65%;
+}
+
+#t9{
+    position: absolute;
+    top: 35%;
+    left: 23.5%;
+}
+
+#t10{
+    position: absolute;
+    top: 35%;
+    left: 37%;
+}
+#t11{
+    position: absolute;
+    bottom: 38%;
+    left: 23.5%;
+}
+
+#t12{
+    position: absolute;
+    bottom: 38%;
+    left: 37%;
+}
+
+#t13{
+    position: absolute;
+    bottom: 13%;
+    left: 24%;
+}
+
+#btn{
+    border: none;
+    padding: 6px 8px;
+    font-size: 19px;
+    border-radius: 50%;
 }
 
 .popover {
