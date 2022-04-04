@@ -12,7 +12,6 @@ export class LocaleService {
 
     getLocales(map: L.Map): Observable<Locale[]> {
         return this.http
-            .get<Locale[]>(`${environment.server}/locales`)
-            .pipe(tap((data) => console.log(data)));
+            .get<Locale[]>(`${environment.server}/locales`);
     }
 }

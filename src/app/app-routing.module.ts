@@ -4,7 +4,7 @@ import { MapComponent } from './map/map.component';
 import { TablesComponent } from './tables/tables.component';
 
 const routes: Routes = [
-    { path: 'map', component: MapComponent },
+    { path: 'locales', component: MapComponent },
     { path: 'tables', component: TablesComponent },
 ];
 
