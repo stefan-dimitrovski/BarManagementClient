@@ -47,7 +47,6 @@ export class MapComponent implements AfterViewInit {
                         });
 
                         marker.bindPopup(this.makeCapitalPopup(l.lat, l.lng))
-
                         marker.addTo(this.map!!)
                     });
                 },
@@ -67,6 +66,7 @@ export class MapComponent implements AfterViewInit {
                 minZoom: 3,
             }
         );
+
         tiles.addTo(this.map);
     }
 
