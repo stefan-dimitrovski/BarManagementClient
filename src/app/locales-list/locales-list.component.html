@@ -8,7 +8,7 @@
     </ng-template>
 
     <ng-template let-locale pTemplate="item" let-i="index">
-      <!--      <a routerLink="/details/{{ locale.id }}" class="locale">-->
+
       <div class="card locale-div mt-2">
         <div (click)="flyTo(locale.lat, locale.lng)">
           <div class="card-title m-lg-2">
@@ -28,8 +28,6 @@
         </div>
       </div>
 
-      <!--      </a>-->
     </ng-template>
-
   </p-virtualScroller>
 </div>
