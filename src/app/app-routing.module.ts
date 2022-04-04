@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { MapComponent } from './map/map.component';
-import { TablesComponent } from './tables/tables.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {MapComponent} from './map/map.component';
+import {TablesComponent} from './tables/tables.component';
 
 const routes: Routes = [
-    { path: 'locales', component: MapComponent },
-    { path: 'tables', component: TablesComponent },
+    {path: 'locales', component: MapComponent},
+    {path: 'locale/:id/tables', component: TablesComponent},
 ];
 
 @NgModule({
