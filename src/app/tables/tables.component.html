@@ -1,69 +1,112 @@
-<div id="bg-layout" class="container-lg img-fluid">
-    <div *ngFor="let table of tables">
-        <div id="t1" *ngIf="table.id==1">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t2" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t3" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t4" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t5" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t6" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t7" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t8" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t9" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t10" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t11" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t12" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
-        <div id="t13" *ngIf="table.id==2">
-            <ng-template *ngTemplateOutlet="tableAvailability; context:{$implicit: table}"></ng-template>
-        </div>
+<div id="bg-layout" class="container-lg">
+  <div *ngFor="let table of tables">
+    <div id="t1" *ngIf="table.id == 1">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
     </div>
+    <div id="t2" *ngIf="table.id == 2">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t3" *ngIf="table.id == 3">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t4" *ngIf="table.id == 4">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t5" *ngIf="table.id == 5">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t6" *ngIf="table.id == 6">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t7" *ngIf="table.id == 7">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t8" *ngIf="table.id == 8">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t9" *ngIf="table.id == 9">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t10" *ngIf="table.id == 10">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t11" *ngIf="table.id == 11">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t12" *ngIf="table.id == 12">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t13" *ngIf="table.id == 13">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+  </div>
 </div>
 
-
 <ng-template #tableAvailability let-table>
-    <button id="btn" pButton pRipple type="button" *ngIf='table.waiter!=null; else tableAvailable' label="T{{table.id}}"
-        class="p-button-rounded p-button-danger p-button-sm" tooltipPosition="top" tooltipStyleClass="p-tooltip-danger" pTooltip="
+  <!-- <button id="btn" pButton pRipple type="button" *ngIf='table.waiter!=null; else tableAvailable' label="T{{table.id}}"
+        class="p-button-rounded p-button-danger p-button-sm" tooltipPosition="top" disabled=true tooltipStyleClass="p-tooltip-danger" pTooltip="
     Availability: {{table.isOpen}}
     Served by: {{table.waiter.name}}
-    "></button>
-    <!-- 
-    <p-badge *ngIf='table.waiter!=null; else tableAvailable' value="T{{table.id}}" disabled=true severity="danger"
-        size="large" styleClass="p-mr-2 p-badge-rounded" tooltipPosition="top" pTooltip="
-    Availability: {{table.isOpen}}
-    Served by: {{table.waiter.name}}
-    "></p-badge> -->
-    <ng-template #tableAvailable>
-        <a routerLink="/tables/{{table.id}}">
-            <!-- <p-badge value="T{{table.id}}" severity="white" size="large"
+    "></button> -->
+
+  <p-badge
+    styleClass="mr-2"
+    value="T{{ table.id }}"
+    *ngIf="table.waiter != null; else tableAvailable"
+    disabled="true"
+    severity="danger"
+    size="large"
+    tooltipPosition="top"
+    pTooltip="
+    Availability: {{ table.isOpen }}
+    Served by: {{ table.waiter.name }}
+    "
+  ></p-badge>
+
+  <ng-template #tableAvailable>
+    <a routerLink="/tables/{{ table.id }}">
+      <!-- <p-badge value="T{{table.id}}" severity="white" size="large"
                 styleClass="p-mr-2 p-badge-secondary p-badge-raised p-badge-text p-badge-plain" tooltipPosition="top"
                 pTooltip="Availability: {{table.isOpen}}"></p-badge> -->
-            <button id="btn" pButton pRipple type="button" label="T{{table.id}}"
-                class="p-button-rounded p-button-secondary p-button-sm" tooltipPosition="top" toolTip pTooltip="
-                Availability: {{table.isOpen}}
-                "></button>
-        </a>
-    </ng-template>
+      <button
+        id="btn"
+        pButton
+        pRipple
+        type="button"
+        label="T{{ table.id }}"
+        class="p-button-rounded p-button-secondary p-button-sm"
+        tooltipPosition="top"
+        toolTip
+        pTooltip="
+                Availability: {{ table.isOpen }}
+                "
+      ></button>
+    </a>
+  </ng-template>
 </ng-template>

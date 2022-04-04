@@ -1,10 +1,11 @@
 #bg-layout {
     background-image: url(../../assets/images/bar-layout.jpg);
-    transform: scale(70%);
+    transform: scale(70%); //Change the Original Image size!!!
     height: 1000px;
     width: auto;
     background-size: cover;
-}   
+    border-radius: 5%;
+}
 
 #t1{
     position: absolute;
@@ -89,6 +90,7 @@
     font-size: 19px;
     border-radius: 50%;
 }
+
 
 .popover {
     position: absolute;

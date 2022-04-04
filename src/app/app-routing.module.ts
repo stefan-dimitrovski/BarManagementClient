@@ -4,12 +4,12 @@ import { MapComponent } from './map/map.component';
 import { TablesComponent } from './tables/tables.component';
 
 const routes: Routes = [
-    {path: 'map', component: MapComponent},
-    {path: 'tables', component: TablesComponent}
+    { path: 'map', component: MapComponent },
+    { path: 'tables', component: TablesComponent },
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

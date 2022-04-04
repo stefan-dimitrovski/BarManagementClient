@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ButtonModule } from 'primeng/button';
-import {BadgeModule} from 'primeng/badge';
-import {TooltipModule} from 'primeng/tooltip';
-
+import { BadgeModule } from 'primeng/badge';
+import { TooltipModule } from 'primeng/tooltip';
+import { AvatarModule } from 'primeng/avatar';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MapComponent } from './map/map.component';
@@ -22,7 +22,8 @@ import { TablesComponent } from './tables/tables.component';
         ButtonModule,
         NgbModule,
         BadgeModule,
-        TooltipModule
+        TooltipModule,
+        AvatarModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
