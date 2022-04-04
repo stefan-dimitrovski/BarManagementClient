@@ -1,7 +1,8 @@
-import {Component, AfterViewInit} from '@angular/core';
+import {Component, AfterViewInit, Input} from '@angular/core';
 import * as L from 'leaflet';
 import {LocaleService} from '../locale.service';
 import {Locale} from "../domain/locale";
+import {LatLngTuple} from "leaflet";
 
 const iconDefault = L.icon({
     iconUrl: 'assets/marker-icon-red.png',
@@ -20,7 +21,10 @@ export class MapComponent implements AfterViewInit {
     map: L.Map | null = null;
     locales: Locale[] = [];
 
-    constructor(private localeService: LocaleService) {}
+    @Input() flyToLatLng: LatLngTuple | null = null;
+
+    constructor(private localeService: LocaleService) {
+    }
 
     ngAfterViewInit(): void {
         this.initMap();
@@ -54,5 +58,10 @@ export class MapComponent implements AfterViewInit {
             }
         );
         tiles.addTo(this.map);
+    }
+
+    flyTo(flyToLatLng: [number, number]): void {
+        this.flyToLatLng = flyToLatLng;
+        this.map?.flyTo(this.flyToLatLng, 15)
     }
 }
