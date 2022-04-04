@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Locale} from './domain/locale';
-import {environment} from 'src/environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { Locale } from './domain/locale';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
