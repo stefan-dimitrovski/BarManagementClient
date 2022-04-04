@@ -1,23 +1,35 @@
 <div id="scroller">
   <p-virtualScroller [value]="locales" scrollHeight="500px">
+
     <ng-template pTemplate="header">
       <div class="flex align-items-center justify-content-center">
         Locales
       </div>
     </ng-template>
+
     <ng-template let-locale pTemplate="item" let-i="index">
       <!--      <a routerLink="/details/{{ locale.id }}" class="locale">-->
-      <div (click)="flyTo(locale.lat, locale.lng)" class="mt-2">
-        <div class="card locale-div">
+      <div class="card locale-div mt-2">
+        <div (click)="flyTo(locale.lat, locale.lng)">
           <div class="card-title m-lg-2">
-            <p class="font-weight-bold"> {{ locale.name | uppercase }} </p>
+            <p id="locale-text-address"> {{ locale.name | uppercase }} </p>
           </div>
           <div class="card-body">
             <p> {{ locale.address }} </p>
           </div>
         </div>
+
+        <div class="card-footer">
+          <a id="btn-locale" class="btn btn-primary" routerLink="/locale-details/{{ locale.id }}">
+            <i class="pi pi-arrow-circle-right"
+               style="font-size: 1rem">
+            </i>
+          </a>
+        </div>
       </div>
+
       <!--      </a>-->
     </ng-template>
+
   </p-virtualScroller>
 </div>
