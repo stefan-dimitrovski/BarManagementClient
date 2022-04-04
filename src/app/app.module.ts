@@ -12,11 +12,10 @@ import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import {CardModule} from 'primeng/card';
 import { TablesComponent } from './tables/tables.component';
 import { TooltipModule } from 'primeng/tooltip';
-import { TableDetailsComponent } from './table-details/table-details.component';
 import { OrderComponent } from './order/order.component';
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, TableDetailsComponent, OrderComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent],
     imports: [
         HttpClientModule,
         BrowserModule,
