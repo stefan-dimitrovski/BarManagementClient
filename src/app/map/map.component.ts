@@ -4,8 +4,16 @@ import {LocaleService} from '../locale.service';
 import {Locale} from "../domain/locale";
 import {LatLngTuple} from "leaflet";
 
-const iconDefault = L.icon({
+const iconBusy = L.icon({
     iconUrl: 'assets/marker-icon-red.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+});
+
+const iconFree = L.icon({
+    iconUrl: 'assets/marker-icon-green.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
@@ -35,8 +43,10 @@ export class MapComponent implements AfterViewInit {
 
                     data.forEach((l) => {
                         const marker = L.marker([l.lat, l.lng], {
-                            icon: iconDefault,
+                            icon: l.id % 2 == 0 ? iconBusy : iconFree,
                         });
+
+                        marker.bindPopup(this.makeCapitalPopup(l.lat, l.lng))
 
                         marker.addTo(this.map!!)
                     });
@@ -63,5 +73,14 @@ export class MapComponent implements AfterViewInit {
     flyTo(flyToLatLng: [number, number]): void {
         this.flyToLatLng = flyToLatLng;
         this.map?.flyTo(this.flyToLatLng, 15)
+    }
+
+    makeCapitalPopup(lat: number, lng: number): string {
+        return `` +
+            // `<div>Capital: ${data.name}</div>` +
+            // `<div>State: ${data.state}</div>` +
+            `<div>Lat: ${lat}</div>` +
+            `<div>Lng: ${lng}</div>`
+        // `<div>Population: ${data.population}</div>`
     }
 }
