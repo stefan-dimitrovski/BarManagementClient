@@ -1,36 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Table } from '../domain/table';
-import { TableService } from '../table.service';
-
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Table} from '../domain/table';
+import {TableService} from '../table.service';
 
 @Component({
-  selector: 'app-tables',
-  templateUrl: './tables.component.html',
-  styleUrls: ['./tables.component.scss']
+    selector: 'app-tables',
+    templateUrl: './tables.component.html',
+    styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
 
-  tables: Table[] | undefined;
-  tables$: Observable<Table[]> = this.tableService.getTables();
+    tables: Table[] | undefined;
+    tables$: Observable<Table[]> = this.tableService.getTables();
 
+    constructor(
+        private tableService: TableService,
+    ) {
+    }
 
-  constructor(
-    private tableService: TableService,
-  ) { }
-
-  ngOnInit(): void {
-    this.tables$.subscribe({
-      next: (data) => {
-        this.tables = data
-        console.log(this.tables)
-      },
-      error: err => {
-        console.log('ERROR', err);
-      }
-    });
-  }
-
-
+    ngOnInit(): void {
+        this.tables$.subscribe({
+            next: (data) => {
+                this.tables = data
+                console.log(this.tables)
+            },
+            error: err => {
+                console.log('ERROR', err);
+            }
+        });
+    }
 
 }
