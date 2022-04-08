@@ -1,10 +1,13 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { MapComponent } from './map/map.component';
-import { TablesComponent } from './tables/tables.component';
-import {OrderComponent} from "./order/order.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {MapComponent} from './map/map.component';
+import {TablesComponent} from './tables/tables.component';
+import {RegisterFormComponent} from "./auth/register-form/register-form.component";
+import {LoginFormComponent} from "./auth/login-form/login-form.component";
 
 const routes: Routes = [
+    {path: 'register', component: RegisterFormComponent},
+    {path: 'login', component: LoginFormComponent},
     {path: 'locales', component: MapComponent},
     {path: 'locale/:id/tables', component: TablesComponent},
 ];
