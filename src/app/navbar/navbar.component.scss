@@ -11,6 +11,7 @@
   background-color: var(--bs-dark);
   border-color: var(--bs-gray);
 }
+
 .form-control-dark:focus {
   color: #fff;
   background-color: var(--bs-dark);
@@ -30,3 +31,13 @@
 .dropdown-toggle {
   outline: 0;
 }
+
+#user-email {
+  color: white;
+  text-decoration: none;
+}
+
+#user-email:hover {
+  text-decoration: underline;
+}
+
