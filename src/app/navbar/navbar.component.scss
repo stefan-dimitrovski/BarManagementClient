@@ -41,6 +41,15 @@
   text-decoration: underline;
 }
 
+#logout {
+  color: white;
+  text-decoration: none;
+}
+
+#logout:hover {
+  text-decoration: underline;
+}
+
 .active-link {
   background-color: grey;
 }

@@ -12,5 +12,12 @@
     <label for="floatingPassword">Password</label>
   </div>
 
+  <div class="checkbox mb-3">
+    <label>
+      No account ?
+      <a routerLink="/register"> Register</a>
+    </label>
+  </div>
+
   <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="!loginForm.valid">Login</button>
 </form>
