@@ -16,6 +16,7 @@ import {OrderComponent} from './order/order.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {RegisterFormComponent} from './auth/register-form/register-form.component';
 import {LoginFormComponent} from './auth/login-form/login-form.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent],
@@ -28,7 +29,9 @@ import {LoginFormComponent} from './auth/login-form/login-form.component';
         VirtualScrollerModule,
         CardModule,
         BadgeModule,
-        TooltipModule
+        TooltipModule,
+        FormsModule,
+        ReactiveFormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
