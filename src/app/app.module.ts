@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BadgeModule} from 'primeng/badge';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -17,6 +17,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {RegisterFormComponent} from './auth/register-form/register-form.component';
 import {LoginFormComponent} from './auth/login-form/login-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AuthInterceptorService} from "./auth-interceptor.service";
 
 @NgModule({
     declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent],
@@ -33,7 +34,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         FormsModule,
         ReactiveFormsModule,
     ],
-    providers: [],
+    providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
     bootstrap: [AppComponent],
 })
 export class AppModule {
