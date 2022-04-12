@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../auth.service";
 import {Router} from "@angular/router";
+import {Emitters} from "../../emitters/emitters";
 
 @Component({
     selector: 'app-login-form',
@@ -25,6 +26,7 @@ export class LoginFormComponent implements OnInit {
     onSubmit(): void {
         this.authService.loginUser(this.loginForm.value).subscribe({
             next: () => {
+                Emitters.authEmitter.emit(true);
                 this.loginForm.reset();
                 this.router.navigate(['/locales']);
             },
