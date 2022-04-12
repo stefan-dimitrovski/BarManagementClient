@@ -17,17 +17,10 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit(): void {
         Emitters.authEmitter.subscribe(
-            (auth: boolean) => {
+            auth => {
                 this.authenticated = auth;
             }
         );
-
-        this.authService.getCurrentUser().subscribe({
-            next: value => {
-                console.log(value);
-                this.email = value.email;
-            }
-        })
     }
 
     logout() {
