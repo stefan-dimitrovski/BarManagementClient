@@ -12,20 +12,25 @@ export class AuthService {
     constructor(private http: HttpClient) {
     }
 
+    getToken() {
+        return localStorage.getItem("token");
+    }
+
     registerUser(formValue: any): Observable<any> {
-        return this.http.post<Observable<any>>(`${environment.server}/register`, formValue);
+        return this.http.post<Observable<any>>(`${environment.server}/auth/register`, formValue);
     }
 
     loginUser(formValue: any): Observable<any> {
-        return this.http.post<Observable<any>>(`${environment.server}/login`, formValue);
+        return this.http.post<Observable<any>>(`${environment.server}/auth/login`, formValue);
     }
 
     //TODO: User Domain
     getCurrentUser(): Observable<any> {
-        return this.http.get(`${environment.server}/user`);
+        return this.http.get(`${environment.server}/auth/user`);
     }
 
     logoutUser(): Observable<any> {
-        return this.http.post(`${environment.server}/logout`, {});
+        localStorage.clear();
+        return this.http.post(`${environment.server}/auth/logout`, {});
     }
 }

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {PrimeNGConfig} from 'primeng/api';
 import {AuthService} from "./auth.service";
 import {Emitters} from "./emitters/emitters";
-import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-root',
@@ -13,8 +12,7 @@ export class AppComponent implements OnInit {
 
     constructor(
         private primengConfig: PrimeNGConfig,
-        private authService: AuthService,
-        private router: Router) {
+        private authService: AuthService) {
     }
 
     ngOnInit() {
@@ -27,7 +25,6 @@ export class AppComponent implements OnInit {
             error: err => {
                 console.error(err);
                 Emitters.authEmitter.emit(false);
-                this.router.navigate(["/login"]);
             }
         });
     }
