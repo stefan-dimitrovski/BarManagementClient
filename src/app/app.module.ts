@@ -18,9 +18,10 @@ import {RegisterFormComponent} from './auth/register-form/register-form.componen
 import {LoginFormComponent} from './auth/login-form/login-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthInterceptorService} from "./auth-interceptor.service";
+import {EmployeesComponent} from './employees/employees.component';
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent],
     imports: [
         HttpClientModule,
         BrowserModule,

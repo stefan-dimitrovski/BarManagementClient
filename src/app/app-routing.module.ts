@@ -5,6 +5,7 @@ import {TablesComponent} from './tables/tables.component';
 import {RegisterFormComponent} from "./auth/register-form/register-form.component";
 import {LoginFormComponent} from "./auth/login-form/login-form.component";
 import {OrderComponent} from "./order/order.component";
+import {EmployeesComponent} from "./employees/employees.component";
 
 const routes: Routes = [
     {path: '', component: RegisterFormComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
     {path: 'login', component: LoginFormComponent},
     {path: 'locales', component: MapComponent},
     {path: 'orders', component: OrderComponent},
+    {path: 'employees', component: EmployeesComponent},
     {path: 'locale/:id/tables', component: TablesComponent},
 ];
 
