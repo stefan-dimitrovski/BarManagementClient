@@ -13,9 +13,13 @@ import {CardModule} from 'primeng/card';
 import {TablesComponent} from './tables/tables.component';
 import {TooltipModule} from 'primeng/tooltip';
 import {OrderComponent} from './order/order.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {RegisterFormComponent} from './auth/register-form/register-form.component';
+import {LoginFormComponent} from './auth/login-form/login-form.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent],
     imports: [
         HttpClientModule,
         BrowserModule,
@@ -25,7 +29,9 @@ import {OrderComponent} from './order/order.component';
         VirtualScrollerModule,
         CardModule,
         BadgeModule,
-        TooltipModule
+        TooltipModule,
+        FormsModule,
+        ReactiveFormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

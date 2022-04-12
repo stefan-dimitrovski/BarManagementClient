@@ -1,5 +1,7 @@
 # BarManagmentClient
 
+[![GitHub Super-Linter](https://github.com/stefan-dimitrovski/BarManagmentClient/actions/workflows/linter-and-dockerhub.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
 
 ## Development server
