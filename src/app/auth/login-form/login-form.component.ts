@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../auth.service";
 import {Router} from "@angular/router";
@@ -9,7 +9,7 @@ import {Emitters} from "../../emitters/emitters";
     templateUrl: './login-form.component.html',
     styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
     loginForm = new FormGroup({
         email: new FormControl('', Validators.email),
         password: new FormControl('', Validators.minLength(8)),
@@ -20,14 +20,15 @@ export class LoginFormComponent implements OnInit {
         private router: Router) {
     }
 
-    ngOnInit(): void {
-    }
-
     onSubmit(): void {
         this.authService.loginUser(this.loginForm.value).subscribe({
-            next: () => {
+            next: value => {
                 Emitters.authEmitter.emit(true);
                 this.loginForm.reset();
+                localStorage.setItem("token", value.token);
+                localStorage.setItem("id", value.id);
+                localStorage.setItem("email", value.email);
+                localStorage.setItem("name", value.name);
                 this.router.navigate(['/locales']);
             },
             error: err => {

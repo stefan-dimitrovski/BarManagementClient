@@ -17,15 +17,15 @@ export class AuthService {
     }
 
     loginUser(formValue: any): Observable<any> {
-        return this.http.post<Observable<any>>(`${environment.server}/login`, formValue, {withCredentials: true});
+        return this.http.post<Observable<any>>(`${environment.server}/login`, formValue);
     }
 
     //TODO: User Domain
     getCurrentUser(): Observable<any> {
-        return this.http.get(`${environment.server}/user`, {withCredentials: true});
+        return this.http.get(`${environment.server}/user`);
     }
 
     logoutUser(): Observable<any> {
-        return this.http.post(`${environment.server}/logout`, {}, {withCredentials: true});
+        return this.http.post(`${environment.server}/logout`, {});
     }
 }
