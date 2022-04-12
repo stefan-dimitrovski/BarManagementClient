@@ -21,6 +21,13 @@ export class NavbarComponent implements OnInit {
                 this.authenticated = auth;
             }
         );
+
+        this.authService.getCurrentUser().subscribe({
+            next: value => {
+                console.log(value);
+                this.email = value.email;
+            }
+        })
     }
 
     logout() {
