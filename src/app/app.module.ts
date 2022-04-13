@@ -19,6 +19,13 @@ import {LoginFormComponent} from './auth/login-form/login-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthInterceptorService} from "./auth-interceptor.service";
 import {EmployeesComponent} from './employees/employees.component';
+import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {SkeletonModule} from "primeng/skeleton";
+import {TableModule} from "primeng/table";
+import {ProgressBarModule} from "primeng/progressbar";
+import {InputTextModule} from "primeng/inputtext";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {OverlayPanelModule} from "primeng/overlaypanel";
 
 @NgModule({
     declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent],
@@ -34,6 +41,13 @@ import {EmployeesComponent} from './employees/employees.component';
         TooltipModule,
         FormsModule,
         ReactiveFormsModule,
+        ProgressSpinnerModule,
+        SkeletonModule,
+        TableModule,
+        ProgressBarModule,
+        InputTextModule,
+        BrowserAnimationsModule,
+        OverlayPanelModule,
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
     bootstrap: [AppComponent],

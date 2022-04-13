@@ -1,1 +1,106 @@
-<p>employees works!</p>
+<div class="container">
+  <p-table [value]="employees" dataKey="id" styleClass="p-datatable-employees" [rowHover]="true"
+           [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" responsiveLayout="scroll"
+           [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+           [filterDelay]="0">
+    <ng-template pTemplate="caption">
+      <div class="table-header">
+        List of Employees
+        <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" placeholder="Global Search"/>
+            </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">
+          <div class="flex justify-content-between align-items-center">
+            Name
+            <p-sortIcon field="name"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="date">
+          <div class="flex justify-content-between align-items-center">
+            Date
+            <p-sortIcon field="date"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="balance">
+          <div class="flex justify-content-between align-items-center">
+            Balance
+            <p-sortIcon field="balance"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="status">
+          <div class="flex justify-content-between align-items-center">
+            Status
+          </div>
+        </th>
+        <th pSortableColumn="activity">
+          <div class="flex justify-content-between align-items-center">
+            Activity
+          </div>
+        </th>
+        <th style="width: 8rem"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-employee>
+      <tr class="p-selectable-row">
+        <td>
+          <span class="p-column-title">Name</span>
+          {{employee.name}}
+        </td>
+        <td>
+          <span class="p-column-title">Date</span>
+          {{employee.date | date: 'MM/dd/yyyy'}}
+        </td>
+        <td>
+          {{employee.balance | currency:'USD':'symbol'}}
+        </td>
+        <td>
+          <span class="p-column-title">Status</span>
+          <span [class]="'customer-badge status-' + employee.status">{{employee.status}}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Activity</span>
+          <p-progressBar [value]="20" [showValue]="false"></p-progressBar>
+        </td>
+        <td style="text-align: center">
+          <button pButton type="button" class="p-button-secondary" icon="pi pi-cog"></button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-container *ngIf="employees.length == 0">
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">No customers found.</td>
+        </tr>
+      </ng-template>
+    </ng-container>
+
+    <ng-container *ngIf="isLoading">
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td>
+            <p-skeleton width="100%" height="4rem"></p-skeleton>
+          </td>
+          <td>
+            <p-skeleton width="100%" height="4rem"></p-skeleton>
+          </td>
+          <td>
+            <p-skeleton width="100%" height="4rem"></p-skeleton>
+          </td>
+          <td>
+            <p-skeleton width="100%" height="4rem"></p-skeleton>
+          </td>
+          <td colspan="8">
+            <p-skeleton width="100%" height="4rem"></p-skeleton>
+          </td>
+        </tr>
+      </ng-template>
+    </ng-container>
+  </p-table>
+
+</div>
