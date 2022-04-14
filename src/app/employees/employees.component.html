@@ -14,16 +14,26 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
+        <th pSortableColumn="id">
+          <div class="flex justify-content-between align-items-center">
+            ID
+            <p-sortIcon field="id"></p-sortIcon>
+          </div>
+        </th>
         <th pSortableColumn="name">
           <div class="flex justify-content-between align-items-center">
             Name
             <p-sortIcon field="name"></p-sortIcon>
           </div>
         </th>
-        <th pSortableColumn="date">
+        <th>
           <div class="flex justify-content-between align-items-center">
-            Date
-            <p-sortIcon field="date"></p-sortIcon>
+            Email
+          </div>
+        </th>
+        <th>
+          <div class="flex justify-content-between align-items-center">
+            Phone Number
           </div>
         </th>
         <th pSortableColumn="balance">
@@ -32,7 +42,13 @@
             <p-sortIcon field="balance"></p-sortIcon>
           </div>
         </th>
-        <th pSortableColumn="status">
+        <th pSortableColumn="role">
+          <div class="flex justify-content-between align-items-center">
+            Role
+            <p-sortIcon field="role"></p-sortIcon>
+          </div>
+        </th>
+        <th>
           <div class="flex justify-content-between align-items-center">
             Status
           </div>
@@ -48,19 +64,34 @@
     <ng-template pTemplate="body" let-employee>
       <tr class="p-selectable-row">
         <td>
+          <span class="p-column-title">ID</span>
+          {{ employee.id }}
+        </td>
+        <td>
           <span class="p-column-title">Name</span>
-          {{employee.name}}
+          {{ employee.name }}
         </td>
         <td>
-          <span class="p-column-title">Date</span>
-          {{employee.date | date: 'MM/dd/yyyy'}}
+          <span class="p-column-title">Email</span>
+          {{ employee.email }}
+        </td>
+        <!--        <td>-->
+        <!--          <span class="p-column-title">Date</span>-->
+        <!--          {{employee.date | date: 'MM/dd/yyyy'}}-->
+        <!--        </td>-->
+        <td>
+          <span class="p-column-title">Phone Number</span>
+          {{ employee.phoneNumber }}
         </td>
         <td>
-          {{employee.balance | currency:'USD':'symbol'}}
+          {{ employee.balance | currency:'USD':'symbol' }}
+        </td>
+        <td>
+          {{ employee.role | uppercase }}
         </td>
         <td>
           <span class="p-column-title">Status</span>
-          <span [class]="'customer-badge status-' + employee.status">{{employee.status}}</span>
+          <span [class]="'customer-badge status-' + employee.status">{{ employee.status }}</span>
         </td>
         <td>
           <span class="p-column-title">Activity</span>
@@ -83,6 +114,15 @@
     <ng-container *ngIf="isLoading">
       <ng-template pTemplate="emptymessage">
         <tr>
+          <td>
+            <p-skeleton width="100%" height="4rem"></p-skeleton>
+          </td>
+          <td>
+            <p-skeleton width="100%" height="4rem"></p-skeleton>
+          </td>
+          <td>
+            <p-skeleton width="100%" height="4rem"></p-skeleton>
+          </td>
           <td>
             <p-skeleton width="100%" height="4rem"></p-skeleton>
           </td>
