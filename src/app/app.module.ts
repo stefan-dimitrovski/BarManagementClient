@@ -26,6 +26,7 @@ import {ProgressBarModule} from "primeng/progressbar";
 import {InputTextModule} from "primeng/inputtext";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {OverlayPanelModule} from "primeng/overlaypanel";
+import {RippleModule} from "primeng/ripple";
 
 @NgModule({
     declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent],
@@ -48,6 +49,7 @@ import {OverlayPanelModule} from "primeng/overlaypanel";
         InputTextModule,
         BrowserAnimationsModule,
         OverlayPanelModule,
+        RippleModule,
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
     bootstrap: [AppComponent],
