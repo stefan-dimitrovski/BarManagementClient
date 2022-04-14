@@ -18,8 +18,11 @@ export class EmployeesComponent implements OnInit {
         this.employeeService.getEmployees().subscribe({
             next: value => {
                 console.log(value);
-                this.isLoading = !this.isLoading;
+                this.isLoading = false;
                 this.employees = value;
+            }, error: err => {
+                console.log(err);
+                this.isLoading = false;
             }
         });
     }

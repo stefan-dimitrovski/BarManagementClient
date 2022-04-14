@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {delay, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {environment} from "../environments/environment";
 import {Employee} from "./domain/employee";
 
@@ -13,8 +13,7 @@ export class EmployeeService {
 
     getEmployees(): Observable<Employee[]> {
         return this.http
-            .get<Employee[]>(`${environment.server}/employees`)
-            .pipe(delay(2000));
+            .get<Employee[]>(`${environment.server}/employees`);
     }
 
 }

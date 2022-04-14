@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Emitters} from "../emitters/emitters";
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../auth.service";
 
 @Component({
@@ -9,29 +8,18 @@ import {AuthService} from "../auth.service";
 })
 export class NavbarComponent implements OnInit {
     authenticated = false;
-    @Input() email: string | null = null;
+    email: string | null = null;
 
     constructor(
         private authService: AuthService) {
     }
 
     ngOnInit(): void {
-        Emitters.authEmitter.subscribe(
-            auth => {
-                this.authenticated = auth;
-            }
-        );
+        //TODO Implement email change when user logged in
     }
 
     logout() {
-        this.authService.logoutUser().subscribe({
-            next: () => {
-                this.authenticated = false;
-            },
-            error: err => {
-                console.error(err);
-            }
-        })
+        this.authService.logoutUser();
     }
 
 }
