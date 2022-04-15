@@ -10,14 +10,12 @@ import {LoginResponse} from "./domain/login-response";
 export class AuthService {
     isLogin = false;
     roleAs: string = '';
-    token: string = '';
-    email: string = '';
 
     constructor(private http: HttpClient) {
     }
 
     getToken() {
-        return this.token;
+        return localStorage.getItem('TOKEN');
     }
 
     registerUser(formValue: any): Observable<any> {
@@ -29,11 +27,9 @@ export class AuthService {
             next: value => {
                 this.isLogin = true;
                 this.roleAs = value.role;
-                this.email = value.email;
-                this.token = value.token;
                 localStorage.setItem('STATE', 'true');
-                localStorage.setItem('TOKEN', this.token);
-                localStorage.setItem('EMAIL', this.email);
+                localStorage.setItem('TOKEN', value.token);
+                localStorage.setItem('EMAIL', value.email);
                 localStorage.setItem('ROLE', this.roleAs);
             }, error: err => {
                 console.error(err);
@@ -44,7 +40,6 @@ export class AuthService {
     logoutUser(): boolean {
         this.isLogin = false;
         this.roleAs = '';
-        this.token = '';
         localStorage.setItem('STATE', 'false');
         localStorage.setItem('TOKEN', '');
         localStorage.setItem('ROLE', '');

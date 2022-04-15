@@ -98,7 +98,12 @@
           <p-progressBar [value]="20" [showValue]="false"></p-progressBar>
         </td>
         <td style="text-align: center">
-          <button pButton type="button" class="p-button-secondary" icon="pi pi-cog"></button>
+          <button pButton type="button" class="p-button-secondary" icon="pi pi-cog" (click)="op.toggle($event)"></button>
+          <p-overlayPanel #op>
+            <ng-template pTemplate>
+              {{ employee.id }}
+            </ng-template>
+          </p-overlayPanel>
         </td>
       </tr>
     </ng-template>
