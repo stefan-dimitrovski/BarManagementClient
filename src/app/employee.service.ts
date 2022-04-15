@@ -16,5 +16,9 @@ export class EmployeeService {
             .get<Employee[]>(`${environment.server}/employees`);
     }
 
+    addEmployeeToLocale(employeeForm: any): Observable<Employee> {
+        return this.http.post<Employee>(`${environment.server}/employees/add-to-locale`, employeeForm);
+    }
+
 }
 

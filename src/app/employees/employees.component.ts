@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from "../employee.service";
 import {Employee} from "../domain/employee";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Locale} from "../domain/locale";
 
 @Component({
     selector: 'app-employees',
@@ -9,7 +11,11 @@ import {Employee} from "../domain/employee";
 })
 export class EmployeesComponent implements OnInit {
     employees: Employee[] = [];
+    locales: Locale[] = [];
     isLoading = true;
+    addToLocaleForm = new FormGroup({
+        localeId: new FormControl('', Validators.required),
+    });
 
     constructor(private employeeService: EmployeeService) {
     }
@@ -25,6 +31,10 @@ export class EmployeesComponent implements OnInit {
                 this.isLoading = false;
             }
         });
+    }
+
+    addEmployeeToLocale() {
+        this.employeeService.addEmployeeToLocale(this.addToLocaleForm.value);
     }
 
 }

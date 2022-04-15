@@ -4,6 +4,7 @@ import {Emitters} from "./emitters/emitters";
 import {Router} from "@angular/router";
 import {AuthService} from "./auth.service";
 import {Role} from "./domain/role";
+import {Locale} from "./domain/locale";
 
 @Component({
     selector: 'app-root',
@@ -11,6 +12,8 @@ import {Role} from "./domain/role";
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+    locales: Locale[] = [];
+
     constructor(
         private primengConfig: PrimeNGConfig,
         private router: Router,
@@ -18,6 +21,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        //TODO Add state in app component then share with kids
         this.primengConfig.ripple = true;
         Emitters.authEmitter.subscribe(
             auth => {
