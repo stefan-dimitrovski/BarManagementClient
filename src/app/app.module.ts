@@ -27,9 +27,12 @@ import {InputTextModule} from "primeng/inputtext";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {RippleModule} from "primeng/ripple";
+import { StorageComponent } from './storage/storage.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import {ChartModule} from "primeng/chart";
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent],
     imports: [
         HttpClientModule,
         BrowserModule,
@@ -50,6 +53,7 @@ import {RippleModule} from "primeng/ripple";
         BrowserAnimationsModule,
         OverlayPanelModule,
         RippleModule,
+        ChartModule,
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
     bootstrap: [AppComponent],

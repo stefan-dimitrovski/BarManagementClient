@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AuthService} from "../auth.service";
 import {Emitters} from "../emitters/emitters";
 
@@ -7,7 +7,7 @@ import {Emitters} from "../emitters/emitters";
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
     authenticated = false;
     email: string | null = null;
 
@@ -17,10 +17,11 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit(): void {
         Emitters.authEmitter.subscribe(auth => {
-            this.authenticated = auth;
             if (auth) {
+                this.authenticated = true;
                 this.email = this.authService.getEmail();
             } else {
+                this.authenticated = false;
                 this.email = null;
             }
         });
@@ -28,6 +29,18 @@ export class NavbarComponent implements OnInit {
 
     logout() {
         this.authService.logoutUser();
+    }
+
+    ngAfterViewInit(): void {
+        const auth = this.authService.isLoggedIn();
+        if (auth) {
+            this.authenticated = true;
+            this.email = this.authService.getEmail();
+        } else {
+            this.authenticated = false;
+            this.email = null;
+        }
+
     }
 
 }
