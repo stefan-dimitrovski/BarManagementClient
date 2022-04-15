@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../auth.service";
+import {Emitters} from "../emitters/emitters";
 
 @Component({
     selector: 'app-navbar',
@@ -15,7 +16,14 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        //TODO Implement email change when user logged in
+        Emitters.authEmitter.subscribe(auth => {
+            this.authenticated = auth;
+            if (auth) {
+                this.email = this.authService.getEmail();
+            } else {
+                this.email = null;
+            }
+        });
     }
 
     logout() {

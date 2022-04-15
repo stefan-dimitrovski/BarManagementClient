@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../environments/environment";
 import {LoginResponse} from "./domain/login-response";
+import {Emitters} from "./emitters/emitters";
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,10 @@ export class AuthService {
         return localStorage.getItem('TOKEN');
     }
 
+    getEmail() {
+        return localStorage.getItem('EMAIL');
+    }
+
     registerUser(formValue: any): Observable<any> {
         return this.http.post<Observable<any>>(`${environment.server}/auth/register`, formValue);
     }
@@ -31,6 +36,7 @@ export class AuthService {
                 localStorage.setItem('TOKEN', value.token);
                 localStorage.setItem('EMAIL', value.email);
                 localStorage.setItem('ROLE', this.roleAs);
+                Emitters.authEmitter.emit(true);
             }, error: err => {
                 console.error(err);
             }
@@ -43,6 +49,8 @@ export class AuthService {
         localStorage.setItem('STATE', 'false');
         localStorage.setItem('TOKEN', '');
         localStorage.setItem('ROLE', '');
+        localStorage.setItem('EMAIL', '');
+        Emitters.authEmitter.emit(false);
         return true;
     }
 
