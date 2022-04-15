@@ -107,7 +107,7 @@
                   (click)="op.toggle($event)"></button>
           <p-overlayPanel #op>
             <ng-template pTemplate>
-              <form [formGroup]="addToLocaleForm" (ngSubmit)="addEmployeeToLocale()" class="mt-3">
+              <form [formGroup]="addToLocaleForm" (ngSubmit)="addEmployeeToLocale(employee.id)" class="mt-3">
                 <span class="p-float-label">
                     <input id="float-localeId" formControlName="localeId" type="text" pInputText required>
                     <label for="float-localeId">Locale Id</label>

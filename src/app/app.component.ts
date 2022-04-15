@@ -21,13 +21,16 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        //TODO Add state in app component then share with kids
+        //TODO Add state in app component then share with children
         this.primengConfig.ripple = true;
         Emitters.authEmitter.subscribe(
             auth => {
                 if (auth) {
                     if (this.authService.getRole() == Role.WAITER) {
-                        this.router.navigate(['/orders']);
+                        const localeId = this.authService.getLocaleId();
+                        localeId ?
+                            this.router.navigate([`/locale/${localeId}/tables`]) :
+                            this.router.navigate(['/no-locale'])
                     } else if (this.authService.getRole() == Role.MANAGER) {
                         this.router.navigate(['/locales']);
                     }

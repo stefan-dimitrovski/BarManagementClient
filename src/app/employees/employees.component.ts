@@ -23,18 +23,24 @@ export class EmployeesComponent implements OnInit {
     ngOnInit(): void {
         this.employeeService.getEmployees().subscribe({
             next: value => {
-                console.log(value);
                 this.isLoading = false;
                 this.employees = value;
             }, error: err => {
-                console.log(err);
+                console.error(err);
                 this.isLoading = false;
             }
         });
     }
 
-    addEmployeeToLocale() {
-        this.employeeService.addEmployeeToLocale(this.addToLocaleForm.value);
+    addEmployeeToLocale(employeeId: number) {
+        //TODO try improve this implementation
+        const response = {
+            employeeId: employeeId,
+            localeId: +this.addToLocaleForm.value.localeId
+        }
+        this.employeeService.addEmployeeToLocale(response).subscribe({
+            next: value => console.log(value)
+        });
     }
 
 }

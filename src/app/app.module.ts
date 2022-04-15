@@ -30,9 +30,10 @@ import {RippleModule} from "primeng/ripple";
 import { StorageComponent } from './storage/storage.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import {ChartModule} from "primeng/chart";
+import { NoLocaleComponent } from './no-locale/no-locale.component';
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent],
     imports: [
         HttpClientModule,
         BrowserModule,

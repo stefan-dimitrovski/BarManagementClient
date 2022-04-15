@@ -9,6 +9,7 @@ import {Emitters} from "../emitters/emitters";
 })
 export class NavbarComponent implements OnInit, AfterViewInit {
     authenticated = false;
+    role: string | null = null;
     email: string | null = null;
 
     constructor(
@@ -17,30 +18,29 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         Emitters.authEmitter.subscribe(auth => {
-            if (auth) {
-                this.authenticated = true;
-                this.email = this.authService.getEmail();
-            } else {
-                this.authenticated = false;
-                this.email = null;
-            }
+            this.checkAuth(auth);
         });
+    }
+
+    ngAfterViewInit(): void {
+        const auth = this.authService.isLoggedIn();
+        this.checkAuth(auth);
     }
 
     logout() {
         this.authService.logoutUser();
     }
 
-    ngAfterViewInit(): void {
-        const auth = this.authService.isLoggedIn();
-        if (auth) {
+    checkAuth(isAuth: boolean) {
+        if (isAuth) {
             this.authenticated = true;
             this.email = this.authService.getEmail();
+            this.role = this.authService.getRole();
         } else {
             this.authenticated = false;
             this.email = null;
+            this.role = null;
         }
-
     }
 
 }

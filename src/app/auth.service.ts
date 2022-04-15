@@ -12,7 +12,9 @@ export class AuthService {
     isLogin = false;
     roleAs: string = '';
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient
+    ) {
     }
 
     getToken() {
@@ -32,10 +34,12 @@ export class AuthService {
             next: value => {
                 this.isLogin = true;
                 this.roleAs = value.role;
+                localStorage.setItem('ID', value.id.toString());
                 localStorage.setItem('STATE', 'true');
                 localStorage.setItem('TOKEN', value.token);
                 localStorage.setItem('EMAIL', value.email);
                 localStorage.setItem('ROLE', this.roleAs);
+                value.locale ? localStorage.setItem('LOCALE', value.locale.id.toString()) : localStorage.setItem('LOCALE', '');
                 Emitters.authEmitter.emit(true);
             }, error: err => {
                 console.error(err);
@@ -47,9 +51,11 @@ export class AuthService {
         this.isLogin = false;
         this.roleAs = '';
         localStorage.setItem('STATE', 'false');
+        localStorage.setItem('ID', '');
         localStorage.setItem('TOKEN', '');
         localStorage.setItem('ROLE', '');
         localStorage.setItem('EMAIL', '');
+        localStorage.setItem('LOCALE', '');
         Emitters.authEmitter.emit(false);
         return true;
     }
@@ -63,5 +69,9 @@ export class AuthService {
     getRole() {
         this.roleAs = localStorage.getItem('ROLE')!!;
         return this.roleAs;
+    }
+
+    getLocaleId() {
+        return localStorage.getItem('LOCALE');
     }
 }
