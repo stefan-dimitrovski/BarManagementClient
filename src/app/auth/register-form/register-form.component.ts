@@ -17,6 +17,7 @@ export class RegisterFormComponent {
     registerForm = new FormGroup({
         name: new FormControl('', Validators.minLength(2)),
         email: new FormControl('', Validators.email),
+        phoneNumber: new FormControl(''),
         password: new FormControl('', Validators.minLength(8)),
         confirmPassword: new FormControl('', Validators.minLength(8))
     }, {validators: matchingPasswordValidator});

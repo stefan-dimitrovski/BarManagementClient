@@ -1,37 +1,46 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Emitters} from "../emitters/emitters";
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AuthService} from "../auth.service";
+import {Emitters} from "../emitters/emitters";
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
     authenticated = false;
-    @Input() email: string | null = null;
+    role: string | null = null;
+    email: string | null = null;
 
     constructor(
         private authService: AuthService) {
     }
 
     ngOnInit(): void {
-        Emitters.authEmitter.subscribe(
-            auth => {
-                this.authenticated = auth;
-            }
-        );
+        Emitters.authEmitter.subscribe(auth => {
+            this.checkAuth(auth);
+        });
+    }
+
+    ngAfterViewInit(): void {
+        const auth = this.authService.isLoggedIn();
+        this.checkAuth(auth);
     }
 
     logout() {
-        this.authService.logoutUser().subscribe({
-            next: () => {
-                this.authenticated = false;
-            },
-            error: err => {
-                console.error(err);
-            }
-        })
+        this.authService.logoutUser();
+    }
+
+    checkAuth(isAuth: boolean) {
+        if (isAuth) {
+            this.authenticated = true;
+            this.email = this.authService.getEmail();
+            this.role = this.authService.getRole();
+        } else {
+            this.authenticated = false;
+            this.email = null;
+            this.role = null;
+        }
     }
 
 }

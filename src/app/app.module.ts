@@ -18,9 +18,22 @@ import {RegisterFormComponent} from './auth/register-form/register-form.componen
 import {LoginFormComponent} from './auth/login-form/login-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthInterceptorService} from "./auth-interceptor.service";
+import {EmployeesComponent} from './employees/employees.component';
+import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {SkeletonModule} from "primeng/skeleton";
+import {TableModule} from "primeng/table";
+import {ProgressBarModule} from "primeng/progressbar";
+import {InputTextModule} from "primeng/inputtext";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {OverlayPanelModule} from "primeng/overlaypanel";
+import {RippleModule} from "primeng/ripple";
+import { StorageComponent } from './storage/storage.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import {ChartModule} from "primeng/chart";
+import { NoLocaleComponent } from './no-locale/no-locale.component';
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent],
     imports: [
         HttpClientModule,
         BrowserModule,
@@ -33,6 +46,15 @@ import {AuthInterceptorService} from "./auth-interceptor.service";
         TooltipModule,
         FormsModule,
         ReactiveFormsModule,
+        ProgressSpinnerModule,
+        SkeletonModule,
+        TableModule,
+        ProgressBarModule,
+        InputTextModule,
+        BrowserAnimationsModule,
+        OverlayPanelModule,
+        RippleModule,
+        ChartModule,
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
     bootstrap: [AppComponent],
