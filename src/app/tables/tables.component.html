@@ -1,4 +1,4 @@
-<div id="bg-layout">
+<div id="bg-layout" class="container">
   <div *ngFor="let table of tables">
     <div id="t1" *ngIf="table.id == 1">
       <ng-template
@@ -69,44 +69,48 @@
 </div>
 
 <ng-template #tableAvailability let-table>
-  <!-- <button id="btn" pButton pRipple type="button" *ngIf='table.waiter!=null; else tableAvailable' label="T{{table.id}}"
-        class="p-button-rounded p-button-danger p-button-sm" tooltipPosition="top" disabled=true tooltipStyleClass="p-tooltip-danger" pTooltip="
-    Availability: {{table.isOpen}}
-    Served by: {{table.waiter.name}}
-    "></button> -->
 
-  <p-badge
-    styleClass="mr-2"
-    value="T{{ table.id }}"
-    *ngIf="table.waiter != null; else tableAvailable"
-    disabled="true"
-    severity="danger"
-    size="large"
-    tooltipPosition="top"
-    pTooltip="
-    Availability: {{ table.isOpen }}
-    Served by: {{ table.waiter.name }}
-    "
-  ></p-badge>
-
-  <ng-template #tableAvailable>
+  <div *ngIf="table.waiter == null; else tableAvailable">
     <a routerLink="/tables/{{ table.id }}">
-      <!-- <p-badge value="T{{table.id}}" severity="white" size="large"
-                styleClass="p-mr-2 p-badge-secondary p-badge-raised p-badge-text p-badge-plain" tooltipPosition="top"
-                pTooltip="Availability: {{table.isOpen}}"></p-badge> -->
       <button
-        id="btn"
         pButton
         pRipple
         type="button"
         label="T{{ table.id }}"
-        class="p-button-rounded p-button-secondary p-button-sm"
+        class="btn p-button-rounded p-button-secondary p-button-sm"
         tooltipPosition="top"
-        toolTip
-        pTooltip="
-                Availability: {{ table.isOpen }}
-                "
-      ></button>
+        pTooltip="Table available"
+      >
+      </button>
     </a>
+  </div>
+
+  <ng-template #tableAvailable>
+    <p-badge *ngIf="table.waiter.id != currentWaiterId; else myTable"
+             styleClass="mr-2"
+             disabled="true"
+             severity="danger"
+             size="large"
+             value="T{{ table.id }}"
+             tooltipPosition="top"
+             pTooltip="Table served by: {{table.waiter.name}}"
+    ></p-badge>
+
+    <ng-template #myTable>
+      <a routerLink="/tables/{{ table.id }}">
+        <button
+          id="my-table"
+          pButton
+          pRipple
+          type="button"
+          label="T{{ table.id }}"
+          class="btn p-button-rounded p-button-success p-button-sm"
+          tooltipPosition="top"
+          pTooltip="Served by: Me"
+        ></button>
+      </a>
+    </ng-template>
+
   </ng-template>
+
 </ng-template>

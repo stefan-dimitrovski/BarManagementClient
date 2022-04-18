@@ -1,20 +1,19 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Drink} from "./domain/drink";
 import {environment} from "../environments/environment";
-import {Order} from "./domain/order";
 
 @Injectable({
     providedIn: 'root'
 })
-export class OrderService {
+export class DrinkService {
 
     constructor(private http: HttpClient) {
     }
 
-    openOrder(waiterId: number, tableId: number): Observable<Order> {
-        return this.http.post<Order>(`${environment.server}/tables/${tableId}/orders/`, {waiterId, tableId})
+    getAllDrinks(): Observable<Drink[]> {
+        return this.http.get<Drink[]>(`${environment.server}/drinks`)
     }
-
 
 }

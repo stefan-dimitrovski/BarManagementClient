@@ -27,10 +27,12 @@ import {InputTextModule} from "primeng/inputtext";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {RippleModule} from "primeng/ripple";
-import { StorageComponent } from './storage/storage.component';
-import { AnalyticsComponent } from './analytics/analytics.component';
-import {ChartModule} from "primeng/chart";
-import { NoLocaleComponent } from './no-locale/no-locale.component';
+import {StorageComponent} from './storage/storage.component';
+import {AnalyticsComponent} from './analytics/analytics.component';
+// import {ChartModule} from "primeng/chart";
+import {NoLocaleComponent} from './no-locale/no-locale.component';
+import {PickListModule} from 'primeng/picklist';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 @NgModule({
     declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent],
@@ -54,7 +56,9 @@ import { NoLocaleComponent } from './no-locale/no-locale.component';
         BrowserAnimationsModule,
         OverlayPanelModule,
         RippleModule,
-        ChartModule,
+        PickListModule,
+        InputNumberModule
+        // ChartModule,
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
     bootstrap: [AppComponent],

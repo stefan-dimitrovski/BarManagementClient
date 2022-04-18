@@ -1,0 +1,7 @@
+export interface Order {
+    id: number,
+    openedAt: Date,
+    closedAt: Date,
+    tableId: number,
+    waiterId: number
+}

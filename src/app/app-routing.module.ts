@@ -25,11 +25,11 @@ const routes: Routes = [
             role: 'MANAGER'
         }
     },
-    {
-        path: 'orders', component: OrderComponent, canActivate: [AuthGuard], data: {
-            role: 'MANAGER'
-        }
-    },
+    // {
+    //     path: 'orders', component: OrderComponent, canActivate: [AuthGuard], data: {
+    //         role: 'MANAGER'
+    //     }
+    // },
     {
         path: 'employees', component: EmployeesComponent, canActivate: [AuthGuard], data: {
             role: 'MANAGER'
@@ -42,6 +42,11 @@ const routes: Routes = [
     },
     {
         path: 'locale/:id/tables', component: TablesComponent, canActivate: [AuthGuard], data: {
+            role: ['WAITER', 'MANAGER']
+        }
+    },
+    {
+        path: 'tables/:tableId', component: OrderComponent, canActivate: [AuthGuard], data: {
             role: ['WAITER', 'MANAGER']
         }
     },
