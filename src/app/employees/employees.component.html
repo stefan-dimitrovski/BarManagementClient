@@ -103,20 +103,21 @@
           </ng-container>
         </td>
         <td style="text-align: center">
+
           <button pButton type="button" class="p-button-secondary" icon="pi pi-cog"
                   (click)="op.toggle($event)"></button>
+
           <p-overlayPanel #op>
             <ng-template pTemplate>
-              <form [formGroup]="addToLocaleForm" (ngSubmit)="addEmployeeToLocale(employee.id)" class="mt-3">
-                <span class="p-float-label">
-                    <input id="float-localeId" formControlName="localeId" type="text" pInputText required>
-                    <label for="float-localeId">Locale Id</label>
-                </span>
-                <button class="w-100 btn btn-lg btn-primary mt-3" type="submit" [disabled]="!addToLocaleForm.valid">Add
-                </button>
-              </form>
+              <p><b>Add employee to locale</b></p>
+              <div *ngFor="let l of locales">
+                <div (click)="addEmployeeToLocale(employee.id, l.id)" class="locale-div p-2">
+                  <p>{{ l.name }}</p>
+                </div>
+              </div>
             </ng-template>
           </p-overlayPanel>
+
         </td>
       </tr>
     </ng-template>
@@ -148,6 +149,7 @@
         </tr>
       </ng-template>
     </ng-container>
+
   </p-table>
 
 </div>
