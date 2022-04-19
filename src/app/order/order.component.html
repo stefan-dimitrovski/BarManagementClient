@@ -1,14 +1,14 @@
 <div class="container">
-  <p-pickList [source]="drinks" [target]="drinksInOrder" sourceHeader="Available Drinks" targetHeader="Bill"
+  <p-pickList [source]="drinks" [target]="drinksInOrder" sourceHeader="Available Drinks" targetHeader="Order number: #"
               [dragdrop]="true"
               [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="name"
               sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">
     <ng-template let-drink pTemplate="item" class="row">
       <div class="product-item col-10">
-        <div class="image-container">
-          <!--          <i class="pi">{{drink.brandName}}</i>-->
-          <!--          <img src="assets/showcase/images/demo/product/{{drink.image}}" [alt]="drink.name" class="product-image" />-->
-        </div>
+        <!--        <div class="image-container">-->
+        <!--          &lt;!&ndash;          <i class="pi">{{drink.brandName}}</i>&ndash;&gt;-->
+        <!--          &lt;!&ndash;          <img src="assets/showcase/images/demo/product/{{drink.image}}" [alt]="drink.name" class="product-image" />&ndash;&gt;-->
+        <!--        </div>-->
         <div class="product-list-detail">
           <h5 class="mb-2">{{drink.brandName}}</h5>
           <i class="pi pi-tag product-category-icon"></i>
@@ -18,12 +18,6 @@
           <h6 class="mb-2">{{drink.price}}MKD</h6>
           <span [class]="'product-badge status-' + drink.category.toLowerCase()">{{drink.category}}</span>
         </div>
-        <p-inputNumber class="quantity" [(ngModel)]="value" mode="decimal" [showButtons]="true" buttonLayout="vertical"
-                       decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary"
-                       incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
-
-        </p-inputNumber>
-
       </div>
 
     </ng-template>

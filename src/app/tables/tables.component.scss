@@ -1,10 +1,14 @@
-#bg-layout {
-  background-image: url(../../assets/images/bar-layout.jpg);
-  transform: scale(70%); //Change the Original Image size!!!
-  height: 1000px;
-  //width: 1823px;
-  //height: 1322px;
-  background-size: cover;
+.container {
+  position: relative;
+  text-align: center;
+  min-height: 600px;
+  height: 700px;
+  width: 965px;
+}
+.container img {
+  height: 100%;
+  width: auto;
+  border-radius: 2.5%;
 }
 
 #t1 {
@@ -88,14 +92,13 @@
 .btn {
   border: none;
   padding: 6px 8px;
-  font-size: 19px;
+  font-size: 0.8rem;
   border-radius: 50%;
 }
 
 #my-table {
   background-color: #056605;
 }
-
 
 .popover {
   position: absolute;
