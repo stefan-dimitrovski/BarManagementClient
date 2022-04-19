@@ -31,9 +31,10 @@ import { StorageComponent } from './storage/storage.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import {ChartModule} from "primeng/chart";
 import { NoLocaleComponent } from './no-locale/no-locale.component';
+import { PhoneFormatPipe } from './phone-format.pipe';
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent, PhoneFormatPipe],
     imports: [
         HttpClientModule,
         BrowserModule,
