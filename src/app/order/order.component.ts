@@ -8,6 +8,8 @@ import {Drink} from "../domain/drink";
 import {TableService} from "../table.service";
 import {Order} from "../domain/order";
 
+import {CdkDragDrop, copyArrayItem, moveItemInArray} from "@angular/cdk/drag-drop";
+
 
 @Component({
     selector: 'app-order',
@@ -18,8 +20,8 @@ export class OrderComponent implements OnInit {
     table: Table | undefined;
     drinks: Drink[] = [];
     order: Order | undefined;
-    drinksInOrder = [];
-    value = 0;
+    drinksInOrder: Drink[] = [];
+    quantity = 0;
 
     constructor(
         private route: ActivatedRoute,
@@ -61,5 +63,19 @@ export class OrderComponent implements OnInit {
 
         })
     }
+
+    drop(event: CdkDragDrop<Drink[]>) {
+        if (event.previousContainer === event.container) {
+            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        } else {
+            copyArrayItem(
+                event.previousContainer.data,
+                event.container.data,
+                event.previousIndex,
+                event.currentIndex,
+            );
+        }
+    }
+
 
 }

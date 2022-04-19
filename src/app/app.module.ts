@@ -33,6 +33,9 @@ import {AnalyticsComponent} from './analytics/analytics.component';
 import {NoLocaleComponent} from './no-locale/no-locale.component';
 import {PickListModule} from 'primeng/picklist';
 import {InputNumberModule} from 'primeng/inputnumber';
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from "@angular/material/input";
+
 
 @NgModule({
     declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent],
@@ -57,7 +60,9 @@ import {InputNumberModule} from 'primeng/inputnumber';
         OverlayPanelModule,
         RippleModule,
         PickListModule,
-        InputNumberModule
+        InputNumberModule,
+        MatCardModule,
+        MatInputModule,
         // ChartModule,
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
