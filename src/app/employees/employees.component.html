@@ -36,23 +36,12 @@
             Phone Number
           </div>
         </th>
-        <!--        <th pSortableColumn="balance">-->
-        <!--          <div class="flex justify-content-between align-items-center">-->
-        <!--            Balance-->
-        <!--            <p-sortIcon field="balance"></p-sortIcon>-->
-        <!--          </div>-->
-        <!--        </th>-->
         <th pSortableColumn="role">
           <div class="flex justify-content-between align-items-center">
             Role
             <p-sortIcon field="role"></p-sortIcon>
           </div>
         </th>
-        <!--        <th pSortableColumn="activity">-->
-        <!--          <div class="flex justify-content-between align-items-center">-->
-        <!--            Activity-->
-        <!--          </div>-->
-        <!--        </th>-->
         <th pSortableColumn="locale">
           <div class="flex justify-content-between align-items-center">
             Works at
@@ -84,16 +73,9 @@
           <span class="p-column-title">Phone Number</span>
           {{ employee.phoneNumber | phone }}
         </td>
-        <!--        <td>-->
-        <!--          {{ employee.balance | currency:'USD':'symbol' }}-->
-        <!--        </td>-->
         <td>
           {{ employee.role | uppercase }}
         </td>
-        <!--        <td>-->
-        <!--          <span class="p-column-title">Activity</span>-->
-        <!--          <p-progressBar [value]="20" [showValue]="false"></p-progressBar>-->
-        <!--        </td>-->
         <td>
           <ng-container *ngIf="employee.worksInLocale">
             {{ employee.worksInLocale.name }}
