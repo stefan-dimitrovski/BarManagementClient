@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        //TODO Add state in app component then share with children
         this.primengConfig.ripple = true;
         Emitters.authEmitter.subscribe(
             auth => {
