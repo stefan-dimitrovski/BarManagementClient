@@ -104,11 +104,11 @@
         </td>
         <td style="text-align: center">
 
-          <button pButton type="button" class="p-button-secondary" icon="pi pi-cog"
+          <button pButton type="button" class="p-button-secondary" icon="pi pi-sitemap"
                   (click)="op.toggle($event)"></button>
 
           <p-overlayPanel #op>
-            <ng-template pTemplate>
+            <ng-template pTemplate="true">
               <p><b>Add employee to locale</b></p>
               <div *ngFor="let l of locales">
                 <div (click)="addEmployeeToLocale(employee.id, l.id)" class="locale-div p-2">
