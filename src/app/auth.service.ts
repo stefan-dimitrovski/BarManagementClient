@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {environment} from "../environments/environment";
 import {LoginResponse} from "./domain/login-response";
 import {Emitters} from "./emitters/emitters";
 
@@ -26,11 +25,11 @@ export class AuthService {
     }
 
     registerUser(formValue: any): Observable<any> {
-        return this.http.post<Observable<any>>(`${environment.server}/auth/register`, formValue);
+        return this.http.post<Observable<any>>(`/api/auth/register`, formValue);
     }
 
     loginUser(formValue: any) {
-        this.http.post<LoginResponse>(`${environment.server}/auth/login`, formValue).subscribe({
+        this.http.post<LoginResponse>(`/api/auth/login`, formValue).subscribe({
             next: value => {
                 this.isLogin = true;
                 this.roleAs = value.role;

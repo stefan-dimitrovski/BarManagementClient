@@ -17,7 +17,7 @@ import {CdkDragDrop, copyArrayItem, moveItemInArray} from "@angular/cdk/drag-dro
     styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-    table: Table | undefined;
+    table!: Table;
     drinks: Drink[] = [];
     order: Order | undefined;
     drinksInOrder: Drink[] = [];
@@ -75,7 +75,12 @@ export class OrderComponent implements OnInit {
                 event.currentIndex,
             );
         }
+        console.log(this.drinksInOrder)
     }
+    //
+    // addDrinkToOrder() : void {
+    //     this.orderService.addDrinkToOrder(this.table.id,this.order?.id)
+    // }
 
 
 }

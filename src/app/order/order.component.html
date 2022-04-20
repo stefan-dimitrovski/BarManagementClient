@@ -35,17 +35,11 @@
         cdkDropListSortingDisabled
         (cdkDropListDropped)="drop($event)">
         <div class="example-box">
-          <mat-card class="card-box" style="display: flex; justify-content: space-between" *ngFor="let drink of drinks"
-                    cdkDrag>
+          <mat-card cdkDrag class="card-box" *ngFor="let drink of drinks">
             <div>
               <mat-card-title>{{drink.brandName}}</mat-card-title>
               <mat-card-subtitle>{{drink.category}}</mat-card-subtitle>
             </div>
-
-              <mat-form-field class="example-full-width" appearance="fill" style="width: 20%">
-                <input matInput type="number" placeholder="quantity" [(ngModel)]="quantity">
-              </mat-form-field>
-
 
           </mat-card>
         </div>
@@ -59,12 +53,18 @@
         cdkDropList
         [cdkDropListData]="drinksInOrder"
         class="example-list"
-        (cdkDropListDropped)="drop($event)">
+        (cdkDropListDropped)="drop($event)"
+      >
         <div class="example-box">
-          <mat-card class="card-box" *ngFor="let drink of drinksInOrder" cdkDrag>
+          <mat-card class="card-box display: flex; justify-content: space-between" *ngFor="let drink of drinksInOrder"
+                    cdkDrag>
             <mat-card-title>{{drink.brandName}}</mat-card-title>
             <mat-card-subtitle>{{drink.category}}</mat-card-subtitle>
-            <mat-card-footer></mat-card-footer>
+
+            <mat-form-field class="example-full-width" style="width:20%">
+              <input matInput type="number" placeholder="quantity" [(ngModel)]="quantity">
+            </mat-form-field>
+
           </mat-card>
         </div>
       </div>

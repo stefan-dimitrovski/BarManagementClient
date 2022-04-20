@@ -90,6 +90,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
+            "browserTarget": "BarManagmentClient:build:development",
             "proxyConfig": "./proxy.conf.json"
           }
         },
