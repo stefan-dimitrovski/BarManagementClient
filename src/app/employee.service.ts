@@ -16,8 +16,11 @@ export class EmployeeService {
             .get<Employee[]>(`${environment.server}/employees`);
     }
 
-    getEmployee(id: number): Observable<Employee> {
-        return this.http.get<Employee>(`${environment.server}/employees/${id}`);
+    searchEmployees(term: string): Observable<Employee[]> {
+        if (!term.trim()) {
+            return this.getEmployees();
+        }
+        return this.http.get<Employee[]>(`${environment.server}/employees/?name=${term}`);
     }
 
     addEmployeeToLocale(employeeForm: any): Observable<Employee> {

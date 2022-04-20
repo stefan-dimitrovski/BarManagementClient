@@ -33,9 +33,10 @@ import {ChartModule} from "primeng/chart";
 import {NoLocaleComponent} from './no-locale/no-locale.component';
 import {PhoneFormatPipe} from './phone-format.pipe';
 import {InputMaskModule} from "primeng/inputmask";
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent, PhoneFormatPipe],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent, PhoneFormatPipe, SearchComponent],
     imports: [
         HttpClientModule,
         BrowserModule,

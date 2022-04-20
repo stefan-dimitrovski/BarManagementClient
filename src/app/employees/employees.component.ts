@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {EmployeeService} from "../employee.service";
 import {Employee} from "../domain/employee";
 import {Locale} from "../domain/locale";
@@ -11,7 +11,7 @@ import {LocaleService} from "../locale.service";
     styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit {
-    employees: Employee[] = [];
+    @Input() employees: Employee[] = [];
     locales: Locale[] = [];
     isLoading = true;
 
@@ -46,6 +46,10 @@ export class EmployeesComponent implements OnInit {
         this.employeeService.addEmployeeToLocale(response).subscribe({
             next: () => this.fetchData$.next()
         });
+    }
+
+    onSearch(value: any) {
+        this.employees = value;
     }
 
 }

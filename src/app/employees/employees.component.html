@@ -9,12 +9,7 @@
           List of Employees
         </div>
 
-        <div>
-          <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input pInputText type="text" placeholder="Search"/>
-          </span>
-        </div>
+        <app-search (valueSearch)="onSearch($event)"></app-search>
 
       </div>
     </ng-template>
