@@ -28,8 +28,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {RippleModule} from "primeng/ripple";
 import {StorageComponent} from './storage/storage.component';
+import {PhoneFormatPipe} from './phone-format.pipe';
+import {InputMaskModule} from "primeng/inputmask";
+import { SearchComponent } from './search/search.component';
 import {AnalyticsComponent} from './analytics/analytics.component';
-// import {ChartModule} from "primeng/chart";
 import {NoLocaleComponent} from './no-locale/no-locale.component';
 import {PickListModule} from 'primeng/picklist';
 import {InputNumberModule} from 'primeng/inputnumber';
@@ -63,7 +65,7 @@ import {MatInputModule} from "@angular/material/input";
         InputNumberModule,
         MatCardModule,
         MatInputModule,
-        // ChartModule,
+        InputMaskModule,
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
     bootstrap: [AppComponent],

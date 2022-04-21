@@ -1,37 +1,87 @@
 <form class="form-register" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <h1 class="h3 mb-3 fw-normal">Please Register</h1>
 
-  <div class="form-floating">
-    <input formControlName="name" type="text" class="form-control" id="name" placeholder="John Smith" required>
-    <label for="floatingInput">Full Name</label>
+  <div>
+    <input type="text" formControlName="name" class="w-100" pInputText placeholder="Full Name" required><br>
+  </div>
+  <div>
+    <input type="email" formControlName="email" class="w-100" pInputText placeholder="Email address" required>
+  </div>
+  <div>
+    <p-inputMask mask="(999) 999-9999" formControlName="phoneNumber" placeholder="Phone number"></p-inputMask>
   </div>
   <div class="form-floating">
-    <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+    <input type="password" formControlName="password" class="w-100" pInputText placeholder="Password" required>
+  </div>
+  <div class="form-floating">
+    <input type="password" formControlName="confirmPassword" class="w-100" pInputText placeholder="Confirm Password"
            required>
-    <label for="floatingInput">Email address</label>
-  </div>
-  <div class="form-floating">
-    <input formControlName="phoneNumber" type="text" class="form-control" id="floatingPhoneNumber"
-           placeholder="12345678"
-           required>
-    <label for="floatingInput">Phone Number</label>
-  </div>
-  <div class="form-floating">
-    <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password"
-           required>
-    <label for="floatingPassword">Password</label>
-  </div>
-  <div class="form-floating">
-    <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword"
-           placeholder="Confirm Password" required>
-    <label for="floatingPassword">Confirm Password</label>
   </div>
 
-  <div class="checkbox mb-3">
+  <div class="checkbox mb-3 mt-3">
     <label>
       Have an account ?
       <a routerLink="/login"> Login</a>
     </label>
+  </div>
+
+  <div
+    *ngIf="registerForm.get('name')!.invalid && (registerForm.get('name')!.dirty || registerForm.get('name')!.touched)"
+    class="alert alert-danger">
+
+    <div *ngIf="registerForm.get('name')!.errors?.['required']">
+      Name is required.
+    </div>
+    <div *ngIf="registerForm.get('name')!.errors?.['minlength']">
+      Name must be at least 2 characters long.
+    </div>
+  </div>
+
+  <div
+    *ngIf="registerForm.get('email')!.invalid && (registerForm.get('email')!.dirty || registerForm.get('email')!.touched)"
+    class="alert alert-danger">
+
+    <div *ngIf="registerForm.get('email')!.errors?.['required']">
+      Email is required.
+    </div>
+    <div *ngIf="registerForm.get('email')!.errors?.['email']">
+      Please enter a valid email format.
+    </div>
+  </div>
+
+  <div
+    *ngIf="registerForm.get('phoneNumber')!.invalid && (registerForm.get('phoneNumber')!.dirty || registerForm.get('phoneNumber')!.touched)"
+    class="alert alert-danger">
+
+    <div *ngIf="registerForm.get('phoneNumber')!.errors?.['required']">
+      Phone number is required.
+    </div>
+  </div>
+
+  <div
+    *ngIf="registerForm.get('password')!.invalid && (registerForm.get('password')!.dirty || registerForm.get('password')!.touched)"
+    class="alert alert-danger">
+
+    <div *ngIf="registerForm.get('password')!.errors?.['required']">
+      Password is required.
+    </div>
+    <div *ngIf="registerForm.get('password')!.errors?.['minlength']">
+      Password must be at least 8 characters long.
+    </div>
+  </div>
+
+  <div
+    *ngIf="registerForm.get('confirmPassword')!.invalid && (registerForm.get('confirmPassword')!.dirty || registerForm.get('confirmPassword')!.touched)"
+    class="alert alert-danger">
+    <div *ngIf="registerForm.get('confirmPassword')!.errors?.['required']">
+      Please confirm your password.
+    </div>
+  </div>
+
+  <div
+    *ngIf="registerForm.invalid && (registerForm.dirty || registerForm.touched)"
+    class="alert alert-danger">
+    Passwords do not match.
   </div>
 
   <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="!registerForm.valid">Register</button>

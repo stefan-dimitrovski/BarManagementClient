@@ -14,17 +14,19 @@ import {Router} from "@angular/router";
     styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent {
-    registerForm = new FormGroup({
-        name: new FormControl('', Validators.minLength(2)),
-        email: new FormControl('', Validators.email),
-        phoneNumber: new FormControl(''),
-        password: new FormControl('', Validators.minLength(8)),
-        confirmPassword: new FormControl('', Validators.minLength(8))
-    }, {validators: matchingPasswordValidator});
+    registerForm: FormGroup;
 
     constructor(
         private authService: AuthService,
         private router: Router) {
+
+        this.registerForm = new FormGroup({
+            name: new FormControl('', [Validators.minLength(2), Validators.required]),
+            email: new FormControl('', [Validators.email, Validators.required]),
+            phoneNumber: new FormControl('', Validators.required),
+            password: new FormControl('', [Validators.minLength(8), Validators.required]),
+            confirmPassword: new FormControl('', [Validators.minLength(8), Validators.required])
+        }, {validators: matchingPasswordValidator})
     }
 
     onSubmit() {

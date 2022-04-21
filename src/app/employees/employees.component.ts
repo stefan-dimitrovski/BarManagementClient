@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {EmployeeService} from "../employee.service";
 import {Employee} from "../domain/employee";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Locale} from "../domain/locale";
+import {forkJoin, Subject, switchMap} from "rxjs";
+import {LocaleService} from "../locale.service";
 
 @Component({
     selector: 'app-employees',
@@ -10,37 +11,45 @@ import {Locale} from "../domain/locale";
     styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit {
-    employees: Employee[] = [];
+    @Input() employees: Employee[] = [];
     locales: Locale[] = [];
     isLoading = true;
-    addToLocaleForm = new FormGroup({
-        localeId: new FormControl('', Validators.required),
-    });
 
-    constructor(private employeeService: EmployeeService) {
+    fetchData$ = new Subject<void>();
+
+    constructor(
+        private employeeService: EmployeeService,
+        private localeService: LocaleService) {
     }
 
     ngOnInit(): void {
-        this.employeeService.getEmployees().subscribe({
+        this.fetchData$.pipe(
+            switchMap(() => forkJoin({
+                locales: this.localeService.getLocales(),
+                employees: this.employeeService.getEmployees(),
+            }))
+        ).subscribe({
             next: value => {
-                this.isLoading = false;
-                this.employees = value;
-            }, error: err => {
-                console.error(err);
-                this.isLoading = false;
+                this.locales = value.locales;
+                this.employees = value.employees;
             }
+        });
+
+        this.fetchData$.next();
+    }
+
+    addEmployeeToLocale(employeeId: number, localeId: number) {
+        const response = {
+            employeeId: employeeId,
+            localeId: localeId
+        }
+        this.employeeService.addEmployeeToLocale(response).subscribe({
+            next: () => this.fetchData$.next()
         });
     }
 
-    addEmployeeToLocale(employeeId: number) {
-        //TODO try improve this implementation
-        const response = {
-            employeeId: employeeId,
-            localeId: +this.addToLocaleForm.value.localeId
-        }
-        this.employeeService.addEmployeeToLocale(response).subscribe({
-            next: value => console.log(value)
-        });
+    onSearch(value: any) {
+        this.employees = value;
     }
 
 }

@@ -4,12 +4,13 @@
            [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
            [filterDelay]="0">
     <ng-template pTemplate="caption">
-      <div class="table-header">
-        List of Employees
-        <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" placeholder="Global Search"/>
-            </span>
+      <div class="table-header d-flex justify-content-between">
+        <div class="mt-3">
+          List of Employees
+        </div>
+
+        <app-search (valueSearch)="onSearch($event)"></app-search>
+
       </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -36,27 +37,15 @@
             Phone Number
           </div>
         </th>
-        <!--        <th pSortableColumn="balance">-->
-        <!--          <div class="flex justify-content-between align-items-center">-->
-        <!--            Balance-->
-        <!--            <p-sortIcon field="balance"></p-sortIcon>-->
-        <!--          </div>-->
-        <!--        </th>-->
         <th pSortableColumn="role">
           <div class="flex justify-content-between align-items-center">
             Role
             <p-sortIcon field="role"></p-sortIcon>
           </div>
         </th>
-        <!--        <th pSortableColumn="activity">-->
-        <!--          <div class="flex justify-content-between align-items-center">-->
-        <!--            Activity-->
-        <!--          </div>-->
-        <!--        </th>-->
-        <th pSortableColumn="locale">
+        <th>
           <div class="flex justify-content-between align-items-center">
             Works at
-            <p-sortIcon field="locale"></p-sortIcon>
           </div>
         </th>
         <th style="width: 8rem"></th>
@@ -76,24 +65,13 @@
           <span class="p-column-title">Email</span>
           {{ employee.email }}
         </td>
-        <!--        <td>-->
-        <!--          <span class="p-column-title">Date</span>-->
-        <!--          {{employee.date | date: 'MM/dd/yyyy'}}-->
-        <!--        </td>-->
         <td>
           <span class="p-column-title">Phone Number</span>
-          {{ employee.phoneNumber }}
+          {{ employee.phoneNumber | phone }}
         </td>
-        <!--        <td>-->
-        <!--          {{ employee.balance | currency:'USD':'symbol' }}-->
-        <!--        </td>-->
         <td>
           {{ employee.role | uppercase }}
         </td>
-        <!--        <td>-->
-        <!--          <span class="p-column-title">Activity</span>-->
-        <!--          <p-progressBar [value]="20" [showValue]="false"></p-progressBar>-->
-        <!--        </td>-->
         <td>
           <ng-container *ngIf="employee.worksInLocale">
             {{ employee.worksInLocale.name }}
@@ -103,20 +81,21 @@
           </ng-container>
         </td>
         <td style="text-align: center">
-          <button pButton type="button" class="p-button-secondary" icon="pi pi-cog"
+
+          <button pButton type="button" class="p-button-secondary" icon="pi pi-sitemap"
                   (click)="op.toggle($event)"></button>
+
           <p-overlayPanel #op>
-            <ng-template pTemplate>
-              <form [formGroup]="addToLocaleForm" (ngSubmit)="addEmployeeToLocale(employee.id)" class="mt-3">
-                <span class="p-float-label">
-                    <input id="float-localeId" formControlName="localeId" type="text" pInputText required>
-                    <label for="float-localeId">Locale Id</label>
-                </span>
-                <button class="w-100 btn btn-lg btn-primary mt-3" type="submit" [disabled]="!addToLocaleForm.valid">Add
-                </button>
-              </form>
+            <ng-template pTemplate="true">
+              <p><b>Add employee to locale</b></p>
+              <div *ngFor="let l of locales">
+                <div (click)="addEmployeeToLocale(employee.id, l.id)" class="locale-div p-2">
+                  <p>{{ l.name }}</p>
+                </div>
+              </div>
             </ng-template>
           </p-overlayPanel>
+
         </td>
       </tr>
     </ng-template>
@@ -148,6 +127,7 @@
         </tr>
       </ng-template>
     </ng-container>
+
   </p-table>
 
 </div>
