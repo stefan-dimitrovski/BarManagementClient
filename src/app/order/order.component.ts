@@ -51,6 +51,13 @@ export class OrderComponent implements OnInit {
                 }
             }
         )
+        if (!this.order) {
+            this.openOrder()
+        }
+
+    }
+
+    openOrder() {
         this.route.paramMap.pipe(filter((params) => params.has('tableId')),
             map((params) => +params.get('tableId')!),
             switchMap((tableId) =>
@@ -60,7 +67,6 @@ export class OrderComponent implements OnInit {
                 this.order = order
                 console.log(this.order)
             }
-
         })
     }
 
@@ -77,6 +83,8 @@ export class OrderComponent implements OnInit {
         }
         console.log(this.drinksInOrder)
     }
+
+
     //
     // addDrinkToOrder() : void {
     //     this.orderService.addDrinkToOrder(this.table.id,this.order?.id)
