@@ -8,13 +8,15 @@ import {AuthService} from "../../auth.service";
     styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent {
-    loginForm = new FormGroup({
-        email: new FormControl('', Validators.email),
-        password: new FormControl('', Validators.minLength(8)),
-    });
+    loginForm: FormGroup;
 
     constructor(
         private authService: AuthService) {
+
+        this.loginForm = new FormGroup({
+            email: new FormControl('', Validators.email),
+            password: new FormControl('', Validators.minLength(8)),
+        });
     }
 
     onSubmit(): void {
