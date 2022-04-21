@@ -10,10 +10,10 @@
   <div>
     <p-inputMask mask="(999) 999-9999" formControlName="phoneNumber" placeholder="Phone number"></p-inputMask>
   </div>
-  <div class="form-floating">
+  <div>
     <input type="password" formControlName="password" class="w-100" pInputText placeholder="Password" required>
   </div>
-  <div class="form-floating">
+  <div>
     <input type="password" formControlName="confirmPassword" class="w-100" pInputText placeholder="Confirm Password"
            required>
   </div>
@@ -75,6 +75,9 @@
     class="alert alert-danger">
     <div *ngIf="registerForm.get('confirmPassword')!.errors?.['required']">
       Please confirm your password.
+    </div>
+    <div *ngIf="registerForm.get('confirmPassword')!.errors?.['minlength']">
+      Password must be at least 8 characters long.
     </div>
   </div>
 
