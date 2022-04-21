@@ -12,6 +12,7 @@ export class TablesComponent implements OnInit {
 
     tables: Table[] | undefined;
     tables$: Observable<Table[]> = this.tableService.getTables();
+    currentWaiterId: number | undefined;
 
     constructor(
         private tableService: TableService,
@@ -19,6 +20,7 @@ export class TablesComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.currentWaiterId = +localStorage.getItem("ID")!
         this.tables$.subscribe({
             next: (data) => {
                 this.tables = data

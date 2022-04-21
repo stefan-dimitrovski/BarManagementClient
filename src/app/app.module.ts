@@ -28,15 +28,19 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {RippleModule} from "primeng/ripple";
 import {StorageComponent} from './storage/storage.component';
-import {AnalyticsComponent} from './analytics/analytics.component';
-import {ChartModule} from "primeng/chart";
-import {NoLocaleComponent} from './no-locale/no-locale.component';
 import {PhoneFormatPipe} from './phone-format.pipe';
 import {InputMaskModule} from "primeng/inputmask";
 import { SearchComponent } from './search/search.component';
+import {AnalyticsComponent} from './analytics/analytics.component';
+import {NoLocaleComponent} from './no-locale/no-locale.component';
+import {PickListModule} from 'primeng/picklist';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from "@angular/material/input";
+
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent, PhoneFormatPipe, SearchComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent],
     imports: [
         HttpClientModule,
         BrowserModule,
@@ -57,7 +61,10 @@ import { SearchComponent } from './search/search.component';
         BrowserAnimationsModule,
         OverlayPanelModule,
         RippleModule,
-        ChartModule,
+        PickListModule,
+        InputNumberModule,
+        MatCardModule,
+        MatInputModule,
         InputMaskModule,
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
