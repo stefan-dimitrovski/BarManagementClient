@@ -30,7 +30,7 @@ import {RippleModule} from "primeng/ripple";
 import {StorageComponent} from './storage/storage.component';
 import {PhoneFormatPipe} from './phone-format.pipe';
 import {InputMaskModule} from "primeng/inputmask";
-import { SearchComponent } from './search/search.component';
+import {SearchComponent} from './search/search.component';
 import {AnalyticsComponent} from './analytics/analytics.component';
 import {NoLocaleComponent} from './no-locale/no-locale.component';
 import {PickListModule} from 'primeng/picklist';
@@ -40,7 +40,7 @@ import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent, PhoneFormatPipe, SearchComponent],
     imports: [
         HttpClientModule,
         BrowserModule,
