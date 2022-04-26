@@ -8,7 +8,8 @@ import {Drink} from "../domain/drink";
 import {TableService} from "../table.service";
 import {Order} from "../domain/order";
 
-import {CdkDragDrop, copyArrayItem, moveItemInArray} from "@angular/cdk/drag-drop";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {DrinkInOrder} from "../domain/drink-in-order";
 
 
 @Component({
@@ -20,8 +21,13 @@ export class OrderComponent implements OnInit {
     table!: Table;
     drinks: Drink[] = [];
     order: Order | undefined;
-    drinksInOrder: Drink[] = [];
     quantity = 0;
+    drinksInOrder: DrinkInOrder[] = [];
+    drinkInOrder: DrinkInOrder | undefined;
+
+    message: string = "";
+    waiterId = +localStorage.getItem("ID")!
+
 
     constructor(
         private route: ActivatedRoute,
@@ -46,49 +52,80 @@ export class OrderComponent implements OnInit {
             {
                 next: (drinks) => {
                     this.drinks = drinks;
-                    console.log(this.drinks)
-
                 }
             }
         )
-        if (!this.order) {
-            this.openOrder()
-        }
-
-    }
-
-    openOrder() {
         this.route.paramMap.pipe(filter((params) => params.has('tableId')),
             map((params) => +params.get('tableId')!),
             switchMap((tableId) =>
-                this.orderService.openOrder(+localStorage.getItem('ID')!, tableId)
+                this.orderService.openOrder(this.waiterId, tableId)
             )).subscribe({
             next: (order) => {
-                this.order = order
-                console.log(this.order)
+                this.order = order;
+                console.log("ORDER:");
+                console.log(order);
+            },
+            error: err => {
+                this.order = err.error.order;
             }
         })
+
     }
 
-    drop(event: CdkDragDrop<Drink[]>) {
+    // openOrder() {
+    //     this.route.paramMap.pipe(filter((params) => params.has('tableId')),
+    //         map((params) => +params.get('tableId')!),
+    //         switchMap((tableId) =>
+    //             this.orderService.openOrder(+localStorage.getItem('ID')!, tableId)
+    //         )).subscribe({
+    //         next: (order) => {
+    //             this.order = order
+    //         }
+    //     })
+    // }
+
+
+    drop(event: CdkDragDrop<any>) {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {
-            copyArrayItem(
-                event.previousContainer.data,
-                event.container.data,
-                event.previousIndex,
-                event.currentIndex,
-            );
+            let drink: Drink = event.previousContainer.data[event.previousIndex];
+            // this.addDrinkToOrder(this.order!.id, drink.id, 0, this.table.id)
+            this.orderService.createDrinkInOrder(this.order!.id, drink.id, 0, this.table.id).subscribe({
+                next: ((d) => {
+                    this.drinkInOrder = d.drinkInOrder;
+                    this.quantity = d.drinkInOrder.quantity;
+                    let isPresent = this.drinksInOrder.filter((el) => {
+                        return el.id == d.drinkInOrder.id;
+                    }).length > 0;
+                    console.log("DRINKS IN ORDER:");
+                    console.log(d.drinkInOrder.id)
+                    if (!isPresent) {
+                        const drinkItem = [{
+                            id: d.drinkInOrder.id,
+                            order: this.order,
+                            drink: event.previousContainer.data[event.previousIndex],
+                            quantity: this.quantity,
+                        }]
+                        transferArrayItem(
+                            drinkItem,
+                            event.container.data,
+                            event.previousIndex,
+                            event.currentIndex);
+                    }
+                }),
+                error: (err) => {
+                    this.message = err.error.message;
+                    this.drinkInOrder = err.error.drinkInOrder;
+                    console.error(this.message);
+                }
+            })
         }
-        console.log(this.drinksInOrder)
     }
 
+    updateDrinkQuantityInOrder(drinkId: number, quantity: number) {
 
-    //
-    // addDrinkToOrder() : void {
-    //     this.orderService.addDrinkToOrder(this.table.id,this.order?.id)
-    // }
+    }
 
 
 }

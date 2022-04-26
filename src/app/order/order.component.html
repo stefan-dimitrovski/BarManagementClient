@@ -1,44 +1,20 @@
-<!--<div class="container">-->
-<!--  <p-pickList [source]="drinks" [target]="drinksInOrder" sourceHeader="Available Drinks" targetHeader="Order number: #{{order!.id}}"-->
-<!--              [dragdrop]="false"-->
-<!--              [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="name"-->
-<!--              sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">-->
-<!--    <ng-template let-drink pTemplate="item" class="row">-->
-<!--      <div class="product-item col-10">-->
-<!--        &lt;!&ndash;        <div class="image-container">&ndash;&gt;-->
-<!--        &lt;!&ndash;          &lt;!&ndash;          <i class="pi">{{drink.brandName}}</i>&ndash;&gt;&ndash;&gt;-->
-<!--        &lt;!&ndash;          &lt;!&ndash;          <img src="assets/showcase/images/demo/product/{{drink.image}}" [alt]="drink.name" class="product-image" />&ndash;&gt;&ndash;&gt;-->
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        <div class="product-list-detail">-->
-<!--          <h5 class="mb-2">{{drink.brandName}}</h5>-->
-<!--          <i class="pi pi-tag product-category-icon"></i>-->
-<!--          <span class="product-category">{{drink.category | lowercase}}</span>-->
-<!--        </div>-->
-<!--        <div class="product-list-action">-->
-<!--          <h6 class="mb-2">{{drink.price}}MKD</h6>-->
-<!--          <span [class]="'product-badge status-' + drink.category.toLowerCase()">{{drink.category}}</span>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </ng-template>-->
-<!--  </p-pickList>-->
-<!--</div>-->
-
 <div class="container mt-3">
   <div cdkDropListGroup>
     <div class="example-container">
       <h2>Available drinks</h2>
 
       <div
-        cdkDropList
+        cdkDropList #productsList="cdkDropList"
         [cdkDropListData]="drinks"
+        [cdkDropListConnectedTo]="[doneList]"
         class="example-list"
-        cdkDropListSortingDisabled
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box">
-          <mat-card cdkDrag class="card-box" *ngFor="let drink of drinks">
+        <div class="example-box" *ngFor="let drink of drinks">
+          <mat-card cdkDrag class="card-box">
             <div>
               <mat-card-title>{{drink.brandName}}</mat-card-title>
               <mat-card-subtitle>{{drink.category}}</mat-card-subtitle>
+              <mat-card-content>{{drink.price | currency: 'MKD' + ' '}}</mat-card-content>
             </div>
 
           </mat-card>
@@ -50,22 +26,25 @@
       <h2>Order number: #{{order?.id}}</h2>
 
       <div
-        cdkDropList
+        cdkDropList #doneList="cdkDropList"
         [cdkDropListData]="drinksInOrder"
         class="example-list"
+        [cdkDropListConnectedTo]="[productsList]"
         (cdkDropListDropped)="drop($event)"
       >
-        <div class="example-box">
-          <mat-card class="card-box display: flex; justify-content: space-between" *ngFor="let drink of drinksInOrder"
-                    cdkDrag>
-            <mat-card-title>{{drink.brandName}}</mat-card-title>
-            <mat-card-subtitle>{{drink.category}}</mat-card-subtitle>
-
+        <div class="example-box" *ngFor="let drink of drinksInOrder"
+        >
+          <mat-card cdkDrag class="card-box">
+            <mat-card-title>{{drink.drink.brandName}}</mat-card-title>
+            <mat-card-subtitle>{{drink.drink.category}}</mat-card-subtitle>
             <mat-form-field class="example-full-width" style="width:20%">
-              <input matInput type="number" placeholder="quantity" [(ngModel)]="quantity">
+              <input matInput type="number" min="0" placeholder="quantity" [(ngModel)]="quantity">
             </mat-form-field>
-
+            <mat-card-footer>
+              <!--                            <button type="button" (click)="addDrinkToOrder(table.id, order!.id, drink.id)">Add</button>-->
+            </mat-card-footer>
           </mat-card>
+
         </div>
       </div>
     </div>
