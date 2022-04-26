@@ -32,6 +32,9 @@ export class EmployeesComponent implements OnInit {
             next: value => {
                 this.locales = value.locales;
                 this.employees = value.employees;
+            },
+            error: err => {
+                console.log(err);
             }
         });
 
@@ -39,12 +42,13 @@ export class EmployeesComponent implements OnInit {
     }
 
     addEmployeeToLocale(employeeId: number, localeId: number) {
-        const response = {
+        const request = {
             employeeId: employeeId,
             localeId: localeId
         }
-        this.employeeService.addEmployeeToLocale(response).subscribe({
-            next: () => this.fetchData$.next()
+        this.employeeService.addEmployeeToLocale(request).subscribe({
+            next: () => this.fetchData$.next(),
+            error: err => console.log(err)
         });
     }
 
