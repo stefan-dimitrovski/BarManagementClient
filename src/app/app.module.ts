@@ -37,10 +37,11 @@ import {PickListModule} from 'primeng/picklist';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from "@angular/material/input";
+import { OrderListComponent } from './order-list/order-list.component';
 
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent, PhoneFormatPipe, SearchComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent, PhoneFormatPipe, SearchComponent, OrderListComponent],
     imports: [
         HttpClientModule,
         BrowserModule,

@@ -10,6 +10,7 @@ import {AuthGuard} from "./auth.guard";
 import {StorageComponent} from "./storage/storage.component";
 import {AnalyticsComponent} from "./analytics/analytics.component";
 import {NoLocaleComponent} from "./no-locale/no-locale.component";
+import {OrderListComponent} from "./order-list/order-list.component";
 
 const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -27,6 +28,11 @@ const routes: Routes = [
     },
     {
         path: 'orders', component: OrderComponent, canActivate: [AuthGuard], data: {
+            role: 'WAITER'
+        }
+    },
+    {
+        path: 'order-list', component: OrderListComponent, canActivate: [AuthGuard], data: {
             role: 'MANAGER'
         }
     },
