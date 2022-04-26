@@ -82,6 +82,15 @@
   </div>
 
   <div
+    *ngIf="errorMsg"
+    class="alert alert-danger">
+
+    <div>
+      {{ errorMsg }}
+    </div>
+  </div>
+
+  <div
     *ngIf="registerForm.invalid && (registerForm.dirty || registerForm.touched)"
     class="alert alert-danger">
     Passwords do not match.

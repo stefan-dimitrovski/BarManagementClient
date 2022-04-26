@@ -16,34 +16,18 @@ export class AuthService {
     ) {
     }
 
-    getToken() {
-        return localStorage.getItem('TOKEN');
-    }
-
-    getEmail() {
-        return localStorage.getItem('EMAIL');
-    }
-
     registerUser(formValue: any): Observable<any> {
         return this.http.post<Observable<any>>(`/api/auth/register`, formValue);
     }
 
-    loginUser(formValue: any) {
-        this.http.post<LoginResponse>(`/api/auth/login`, formValue).subscribe({
-            next: value => {
-                this.isLogin = true;
-                this.roleAs = value.role;
-                localStorage.setItem('ID', value.id.toString());
-                localStorage.setItem('STATE', 'true');
-                localStorage.setItem('TOKEN', value.token);
-                localStorage.setItem('EMAIL', value.email);
-                localStorage.setItem('ROLE', this.roleAs);
-                value.locale ? localStorage.setItem('LOCALE', value.locale.id.toString()) : localStorage.setItem('LOCALE', '');
-                Emitters.authEmitter.emit(true);
-            }, error: err => {
-                console.error(err);
-            }
-        });
+    loginUser(formValue: any): Observable<any> {
+        return this.http.post<LoginResponse>(`/api/auth/login`, formValue);
+    }
+
+    isLoggedIn() {
+        const loggedIn = localStorage.getItem('STATE');
+        this.isLogin = loggedIn == 'true';
+        return this.isLogin;
     }
 
     logoutUser(): boolean {
@@ -59,10 +43,16 @@ export class AuthService {
         return true;
     }
 
-    isLoggedIn() {
-        const loggedIn = localStorage.getItem('STATE');
-        this.isLogin = loggedIn == 'true';
-        return this.isLogin;
+    saveUserToLocalStorage(data: any) {
+        this.isLogin = true;
+        this.roleAs = data.role;
+        localStorage.setItem('ID', data.id.toString());
+        localStorage.setItem('STATE', 'true');
+        localStorage.setItem('TOKEN', data.token);
+        localStorage.setItem('EMAIL', data.email);
+        localStorage.setItem('ROLE', this.roleAs);
+        data.locale ? localStorage.setItem('LOCALE', data.locale.id.toString()) : localStorage.setItem('LOCALE', '');
+        Emitters.authEmitter.emit(true);
     }
 
     getRole() {
@@ -72,5 +62,13 @@ export class AuthService {
 
     getLocaleId() {
         return localStorage.getItem('LOCALE');
+    }
+
+    getToken() {
+        return localStorage.getItem('TOKEN');
+    }
+
+    getEmail() {
+        return localStorage.getItem('EMAIL');
     }
 }

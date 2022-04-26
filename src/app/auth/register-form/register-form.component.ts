@@ -15,6 +15,7 @@ import {Router} from "@angular/router";
 })
 export class RegisterFormComponent {
     registerForm: FormGroup;
+    errorMsg: string | null = null;
 
     constructor(
         private authService: AuthService,
@@ -36,8 +37,7 @@ export class RegisterFormComponent {
                 this.router.navigate(['/login']);
             },
             error: err => {
-                //TODO: Error Handling
-                console.error("Something went wrong");
+                this.errorMsg = err.error;
                 console.error(err);
             }
         });

@@ -9,6 +9,7 @@ import {AuthService} from "../../auth.service";
 })
 export class LoginFormComponent {
     loginForm: FormGroup;
+    errorMsg: string | null = null;
 
     constructor(
         private authService: AuthService) {
@@ -20,6 +21,13 @@ export class LoginFormComponent {
     }
 
     onSubmit(): void {
-        this.authService.loginUser(this.loginForm.value);
+        this.authService.loginUser(this.loginForm.value).subscribe({
+            next: value => {
+                this.loginForm.reset();
+                this.authService.saveUserToLocalStorage(value);
+            }, error: err => {
+                this.errorMsg = err.error;
+            }
+        });
     }
 }
