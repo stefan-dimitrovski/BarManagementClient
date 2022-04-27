@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Order} from "./domain/order";
 import {DrinkInOrder} from "./domain/drink-in-order";
 import {DrinkInOrderResponse} from "./domain/drink-in-order-response";
+import {OrderResponse} from "./domain/order-response";
 
 @Injectable({
     providedIn: 'root'
@@ -13,8 +14,8 @@ export class OrderService {
     constructor(private http: HttpClient) {
     }
 
-    openOrder(waiterId: number, tableId: number): Observable<Order> {
-        return this.http.post<Order>(`/api/tables/${tableId}/orders/open-order`, {waiterId, tableId})
+    openOrder(waiterId: number, tableId: number): Observable<OrderResponse> {
+        return this.http.post<OrderResponse>(`/api/tables/${tableId}/orders/create-order`, {waiterId, tableId})
     }
 
     createDrinkInOrder(orderId: number, drinkId: number, quantity: number, tableId: number): Observable<DrinkInOrderResponse> {
@@ -23,6 +24,14 @@ export class OrderService {
             drinkId,
             quantity
         })
+    }
+
+    getAllDrinksInOrder(orderId: number): Observable<DrinkInOrder[]> {
+        return this.http.get<DrinkInOrder[]>(`/api/tables/{tableId}/orders/order?id=${orderId}`)
+    }
+
+    getOrder (id: number) : Observable<Order>{
+        return this.http.get<Order>(`/api/tables/{tableId}/orders/get-order?id=${id}`)
     }
 
     findByOrderIdAndDrinkId(orderId: number, drinkId: number, tableId: number): Observable<DrinkInOrderResponse> {

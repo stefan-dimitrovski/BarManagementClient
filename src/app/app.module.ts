@@ -37,6 +37,9 @@ import {PickListModule} from 'primeng/picklist';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from "@angular/material/input";
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from "primeng/api";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -66,8 +69,10 @@ import {MatInputModule} from "@angular/material/input";
         MatCardModule,
         MatInputModule,
         InputMaskModule,
+        ToastModule,
+        MatButtonModule
     ],
-    providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
+    providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},MessageService],
     bootstrap: [AppComponent],
 })
 export class AppModule {
