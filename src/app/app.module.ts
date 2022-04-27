@@ -38,13 +38,12 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from "@angular/material/input";
 import {OrderListComponent} from './order-list/order-list.component';
-import {OrderDialogComponent} from './dialog/order-dialog/order-dialog.component';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConfirmationService} from 'primeng/api';
 
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent, PhoneFormatPipe, SearchComponent, OrderListComponent, OrderDialogComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent, PhoneFormatPipe, SearchComponent, OrderListComponent],
     imports: [
         HttpClientModule,
         BrowserModule,
