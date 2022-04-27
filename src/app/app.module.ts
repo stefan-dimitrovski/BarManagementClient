@@ -37,11 +37,14 @@ import {PickListModule} from 'primeng/picklist';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from "@angular/material/input";
-import { OrderListComponent } from './order-list/order-list.component';
+import {OrderListComponent} from './order-list/order-list.component';
+import {OrderDialogComponent} from './dialog/order-dialog/order-dialog.component';
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ConfirmationService} from 'primeng/api';
 
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent, PhoneFormatPipe, SearchComponent, OrderListComponent],
+    declarations: [AppComponent, MapComponent, LocalesListComponent, TablesComponent, OrderComponent, NavbarComponent, RegisterFormComponent, LoginFormComponent, EmployeesComponent, StorageComponent, AnalyticsComponent, NoLocaleComponent, PhoneFormatPipe, SearchComponent, OrderListComponent, OrderDialogComponent],
     imports: [
         HttpClientModule,
         BrowserModule,
@@ -67,8 +70,9 @@ import { OrderListComponent } from './order-list/order-list.component';
         MatCardModule,
         MatInputModule,
         InputMaskModule,
+        ConfirmDialogModule,
     ],
-    providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
+    providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}, ConfirmationService],
     bootstrap: [AppComponent],
 })
 export class AppModule {

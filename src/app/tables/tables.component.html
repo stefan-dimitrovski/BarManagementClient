@@ -69,18 +69,17 @@
     <ng-template #tableAvailability let-table>
 
       <div *ngIf="table.waiter == null; else tableAvailable">
-        <a routerLink="/tables/{{ table.id }}">
-          <button
-            pButton
-            pRipple
-            type="button"
-            label="T{{ table.id }}"
-            class="btn p-button-rounded p-button-secondary p-button-sm"
-            tooltipPosition="top"
-            pTooltip="Table available"
-          >
-          </button>
-        </a>
+        <button
+          (click)="confirm(table.id)"
+          pButton
+          pRipple
+          type="button"
+          label="T{{ table.id }}"
+          class="btn p-button-rounded p-button-secondary p-button-sm"
+          tooltipPosition="top"
+          pTooltip="Table available"
+        >
+        </button>
       </div>
 
 
@@ -118,4 +117,6 @@
 
 </div>
 
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
