@@ -40,6 +40,7 @@ import {MatInputModule} from "@angular/material/input";
 import {OrderListComponent} from './order-list/order-list.component';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConfirmationService} from 'primeng/api';
+import {ChartModule} from "primeng/chart";
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import {ConfirmationService} from 'primeng/api';
         MatInputModule,
         InputMaskModule,
         ConfirmDialogModule,
+        ChartModule,
     ],
     providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}, ConfirmationService],
     bootstrap: [AppComponent],

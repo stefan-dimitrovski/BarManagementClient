@@ -43,7 +43,6 @@ export class TablesComponent implements OnInit {
                 this.router.navigate([`/tables/${id}`]);
             },
             reject: () => {
-
             }
         });
     }

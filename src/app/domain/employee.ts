@@ -6,5 +6,6 @@ export interface Employee {
     phoneNumber: string;
     role: string;
     id: number;
+    dateEmployed: string;
     worksInLocale: Locale;
 }
