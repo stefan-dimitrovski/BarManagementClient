@@ -24,7 +24,6 @@
 
     <div class="example-container">
       <h2>Order number: #{{order?.id}}</h2>
-
       <div
         cdkDropList #doneList="cdkDropList"
         [cdkDropListData]="drinksInOrder"
@@ -32,22 +31,24 @@
         [cdkDropListConnectedTo]="[productsList]"
         (cdkDropListDropped)="drop($event)"
       >
-        <div class="example-box" *ngFor="let drink of drinksInOrder"
+        <div class="example-box" *ngFor="let drink of drinksInOrder; index as i"
         >
           <mat-card cdkDrag class="card-box">
             <mat-card-title>{{drink.drink.brandName}}</mat-card-title>
             <mat-card-subtitle>{{drink.drink.category}}</mat-card-subtitle>
 
-              <form [formGroup]="quantityForm" (ngSubmit)="updateDrinkQuantityInOrder()">
-                <mat-form-field class="example-full-width" style="width:15%">
-                  <input matInput type="number" min="0" placeholder="Quantity" value="{{drink.quantity}}">
-                </mat-form-field>
-                <button type="submit" mat-stroked-button color="primary" >Add to order</button>
-              </form>
+            <form>
+              <mat-form-field class="example-full-width" style="width:15%">
+                <input [formControl]="controls.get(drink.id)" matInput type="number" min="0" placeholder="Quantity">
+              </mat-form-field>
+              <button type="submit" mat-stroked-button color="primary"
+                      (click)="updateDrinkQuantityInOrder(drink.id, drink.order.id)">Add to order
+              </button>
+            </form>
 
           </mat-card>
-
         </div>
+        <a>Total: {{this.orderView?.totalPrice}} </a>
       </div>
     </div>
   </div>

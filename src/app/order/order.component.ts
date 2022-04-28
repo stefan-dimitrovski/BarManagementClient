@@ -7,12 +7,13 @@ import {Table} from "../domain/table";
 import {Drink} from "../domain/drink";
 import {TableService} from "../table.service";
 import {Order} from "../domain/order";
-import {FormBuilder} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 
 
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {DrinkInOrder} from "../domain/drink-in-order";
 import {MessageService} from "primeng/api";
+import {OrderView} from "../domain/order-view";
 
 
 @Component({
@@ -24,14 +25,13 @@ export class OrderComponent implements OnInit {
     table: Table | undefined;
     drinks: Drink[] = [];
     order: Order | undefined;
-    quantity = 0;
     drinksInOrder: DrinkInOrder[] = [];
     drinkInOrder: DrinkInOrder | undefined;
 
-    quantityForm = this.formBuilder.group({
-        quantity: 0,
+    orderView: OrderView | undefined
 
-    });
+    controls = new Map();
+
     message: string = "";
     waiterId = +localStorage.getItem("ID")!
 
@@ -42,7 +42,6 @@ export class OrderComponent implements OnInit {
         private drinkService: DrinkService,
         private tableService: TableService,
         private messageService: MessageService,
-        private formBuilder: FormBuilder
     ) {
     }
 
@@ -75,15 +74,19 @@ export class OrderComponent implements OnInit {
         )
             .subscribe({
                 next: (response) => {
+                    for (let i = 0; i < response.drinks.length; i++) {
+                        this.controls.set(response.drinks[i].id, new FormControl(response.drinks[i].quantity))
+                    }
                     this.order = response.order;
-                    this.drinksInOrder = response.drinks;
-
+                    this.drinksInOrder = response.drinks.sort((a, b) => a.id - b.id
+                    )
                 },
                 error: (err) => {
                     this.message = err.error.message
                     console.error(this.message)
                 }
             })
+
     }
 
 
@@ -92,10 +95,12 @@ export class OrderComponent implements OnInit {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {
             let drink: Drink = event.previousContainer.data[event.previousIndex];
-            this.orderService.createDrinkInOrder(this.order!.id, drink.id, 0, this.table!.id).subscribe({
+            this.orderService.createDrinkInOrder(this.order!.id, drink.id, 0, this.table!.id)
+            .subscribe({
                 next: ((response) => {
                     this.drinkInOrder = response.drinkInOrder;
-                    this.quantity = response.drinkInOrder.quantity;
+                    let qty = response.drinkInOrder.quantity;
+                    this.controls.set(response.drinkInOrder.id, new FormControl(qty));
                     let isPresent = this.drinksInOrder.filter((el) => {
                         return el.id == response.drinkInOrder.id;
                     }).length > 0;
@@ -106,7 +111,7 @@ export class OrderComponent implements OnInit {
                             id: response.drinkInOrder.id,
                             order: this.order,
                             drink: event.previousContainer.data[event.previousIndex],
-                            quantity: this.quantity,
+                            quantity: qty
                         }]
                         transferArrayItem(
                             drinkItem,
@@ -133,14 +138,25 @@ export class OrderComponent implements OnInit {
         });
     }
 
+    updateDrinkQuantityInOrder(drinkInOrderId: number, orderId: number) {
+        console.log(drinkInOrderId)
+        let qty = this.controls.get(drinkInOrderId).value
+        this.orderService.updateDrinkQuantityInOrder(drinkInOrderId, qty).pipe(
+        ).subscribe({
+            next: (response) => {
+                this.drinkInOrder = response
+                console.log(response)
+            },
+            error: (err) => {
+                this.message = err.error.message
+                console.log(this.message)
+            }
+        })
 
-    updateDrinkQuantityInOrder(){
-
+        this.orderService.getOrderInfo(orderId).subscribe(
+            (it) => this.orderView = it
+        )
     }
-
-    // updateDrinkQuantityInOrder(drinkId: number, quantity: number) {
-    //
-    // }
 
 
 }
