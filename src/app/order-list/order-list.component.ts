@@ -6,11 +6,11 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./order-list.component.scss']
 })
 export class OrderListComponent implements OnInit {
+    isLoading = true;
 
     constructor() {
     }
 
     ngOnInit(): void {
     }
-
 }

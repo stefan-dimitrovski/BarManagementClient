@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AnalyticsService} from "../analytics.service";
 import {EmployeesInLocalesAnalytics} from "../domain/employees-in-locales-analytics";
+import {forkJoin} from "rxjs";
 
 @Component({
     selector: 'app-analytics',
@@ -8,10 +9,9 @@ import {EmployeesInLocalesAnalytics} from "../domain/employees-in-locales-analyt
     styleUrls: ['./analytics.component.scss']
 })
 export class AnalyticsComponent implements OnInit {
-    employeesInLocalesAnalytics: EmployeesInLocalesAnalytics[] = [];
-
+    isLoading = true;
     employeeData: any;
-    basicOptions: any;
+    drinksData: any;
 
     constructor(
         private analyticsService: AnalyticsService,
@@ -19,18 +19,22 @@ export class AnalyticsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.analyticsService.getEmployeeNumbersByLocale().subscribe({
+        forkJoin({
+            employeeData: this.analyticsService.getEmployeeNumbersByLocale(),
+            drinksData: this.analyticsService.getDrinksByPopularity(),
+        }).subscribe({
             next: value => {
-                this.employeesInLocalesAnalytics = value;
-                this.defineDatasets();
+                this.isLoading = false;
+                this.defineEmployeeDatasets(value.employeeData);
+                this.defineDrinksDatasets(value.drinksData);
             }
-        });
+        })
     }
 
-    defineDatasets() {
+    defineEmployeeDatasets(employeesInLocalesAnalytics: EmployeesInLocalesAnalytics[]) {
         let datasets: any[] = []
 
-        this.employeesInLocalesAnalytics.forEach(e => {
+        employeesInLocalesAnalytics.forEach(e => {
 
             datasets.push({
                 label: e.locale.name,
@@ -47,6 +51,22 @@ export class AnalyticsComponent implements OnInit {
         };
     }
 
+    defineDrinksDatasets(drinksByPopularity: any[]) {
+        this.drinksData = {
+            labels: ['Margarita', 'Cosmopolitan', 'Mojito'],
+            datasets: [
+                {
+                    data: [300, 50, 100],
+                    backgroundColor: [
+                        "#42A5F5",
+                        "#66BB6A",
+                        "#FFA726"
+                    ],
+                }
+            ]
+        };
+    }
+
     generateColor() {
         let letters = '0123456789ABCDEF';
         let color = '#';
@@ -55,5 +75,4 @@ export class AnalyticsComponent implements OnInit {
         }
         return color;
     }
-
 }

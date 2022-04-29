@@ -13,6 +13,10 @@ export class AnalyticsService {
     }
 
     getEmployeeNumbersByLocale(): Observable<EmployeesInLocalesAnalytics[]> {
-        return this.http.get<EmployeesInLocalesAnalytics[]>(`${environment.server}/analytics/employees-in-locales`)
+        return this.http.get<EmployeesInLocalesAnalytics[]>(`${environment.server}/analytics/employees-in-locales`);
+    }
+
+    getDrinksByPopularity(): Observable<any> {
+        return this.http.get<any>(`${environment.server}/analytics/drinks-by-popularity`);
     }
 }
