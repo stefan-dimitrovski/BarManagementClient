@@ -1,13 +1,13 @@
-<div class="container mt-3">
+<div class="container mt-3" *ngIf="order">
   <div cdkDropListGroup>
-    <div class="example-container">
+    <div class="drinks-container">
       <h2>Available drinks</h2>
 
       <div
         cdkDropList #productsList="cdkDropList"
         [cdkDropListData]="drinks"
         [cdkDropListConnectedTo]="[doneList]"
-        class="example-list"
+        class="drinks-list"
         (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let drink of drinks">
           <mat-card cdkDrag class="card-box">
@@ -22,39 +22,41 @@
       </div>
     </div>
 
-    <div class="example-container">
+    <div class="drinks-container" >
       <h2>Order number: #{{order?.id}}</h2>
       <div
         cdkDropList #doneList="cdkDropList"
         [cdkDropListData]="drinksInOrder"
-        class="example-list"
+        class="drinks-list"
         [cdkDropListConnectedTo]="[productsList]"
         (cdkDropListDropped)="drop($event)"
       >
-        <div class="example-box" *ngFor="let drink of drinksInOrder; index as i"
-        >
+        <div class="example-box" *ngFor="let drink of drinksInOrder; index as i">
           <mat-card cdkDrag class="card-box">
             <mat-card-title>{{drink.drink.brandName}}</mat-card-title>
             <mat-card-subtitle>{{drink.drink.category}}</mat-card-subtitle>
 
             <form>
-              <mat-form-field class="example-full-width" style="width:15%">
+              <mat-form-field id="quantity" class="example-full-width" style="width:15%">
                 <input [formControl]="controls.get(drink.id)" matInput type="number" min="0" placeholder="Quantity">
               </mat-form-field>
               <button type="submit" mat-stroked-button color="primary"
                       (click)="updateDrinkQuantityInOrder(drink.id, drink.order.id)">Add to order
               </button>
             </form>
-
           </mat-card>
         </div>
-        <a>Total: {{this.orderView?.totalPrice}} </a>
+        <span id="total-price">Total: {{this.totalPrice}} </span>
+        <button *ngIf="drinksInOrder.length > 0 && totalPrice!=0" mat-raised-button color="primary"
+                (click)="closeOrder()">Checkout
+        </button>
       </div>
     </div>
   </div>
 
-
 </div>
 
 <p-toast></p-toast>
+
+
 

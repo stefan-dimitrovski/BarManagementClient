@@ -5,7 +5,6 @@ import {Order} from "./domain/order";
 import {DrinkInOrder} from "./domain/drink-in-order";
 import {DrinkInOrderResponse} from "./domain/drink-in-order-response";
 import {OrderResponse} from "./domain/order-response";
-import {OrderView} from "./domain/order-view";
 
 @Injectable({
     providedIn: 'root'
@@ -40,16 +39,13 @@ export class OrderService {
         return this.http.put<DrinkInOrder>(`/api/orders/drink-in-order/update-quantity`, {drinkInOrderId, quantity})
     }
 
-    getOrderInfo(id: number): Observable<OrderView> {
-        return this.http.get<OrderView>(`/api/tables/{tableId}/orders/order-info?id=${id}`)
+    getTotalPriceByOrder(orderId: number): Observable<number> {
+        return this.http.get<number>(`/api/tables/{tableId}/orders/total-price?orderId=${orderId}`)
     }
 
-    findByOrderIdAndDrinkId(orderId: number, drinkId: number, tableId: number): Observable<DrinkInOrderResponse> {
-        return this.http.get<DrinkInOrderResponse>(`/api/tables/${tableId}/orders/orderId`)
-    }
+    closeOrder(orderId: number, tableId: number): Observable<any> {
+        return this.http.put<any>(`/api/tables/${tableId}/orders/close-order`, {orderId})
 
-    addDrinkToOrder(tableId: number, orderId: number, drinkId: number): Observable<DrinkInOrder> {
-        return this.http.post<DrinkInOrder>(`/api/tables/${tableId}/orders/add-drink`, {orderId, drinkId})
     }
 
 

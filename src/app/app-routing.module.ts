@@ -25,11 +25,7 @@ const routes: Routes = [
             role: 'MANAGER'
         }
     },
-    // {
-    //     path: 'orders', component: OrderComponent, canActivate: [AuthGuard], data: {
-    //         role: 'MANAGER'
-    //     }
-    // },
+
     {
         path: 'employees', component: EmployeesComponent, canActivate: [AuthGuard], data: {
             role: 'MANAGER'

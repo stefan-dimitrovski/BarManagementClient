@@ -9,11 +9,9 @@ import {TableService} from "../table.service";
 import {Order} from "../domain/order";
 import {FormControl} from "@angular/forms";
 
-
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {DrinkInOrder} from "../domain/drink-in-order";
 import {MessageService} from "primeng/api";
-import {OrderView} from "../domain/order-view";
 
 
 @Component({
@@ -27,11 +25,8 @@ export class OrderComponent implements OnInit {
     order: Order | undefined;
     drinksInOrder: DrinkInOrder[] = [];
     drinkInOrder: DrinkInOrder | undefined;
-
-    orderView: OrderView | undefined
-
+    totalPrice: number | undefined;
     controls = new Map();
-
     message: string = "";
     waiterId = +localStorage.getItem("ID")!
 
@@ -46,6 +41,7 @@ export class OrderComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
         this.route.paramMap.pipe(filter((params) => params.has('tableId')),
             map((params) => +params.get('tableId')!),
             switchMap((tableId) => this.tableService.getTableById(tableId)
@@ -67,8 +63,11 @@ export class OrderComponent implements OnInit {
             map((params) => +params.get('tableId')!),
             switchMap((tableId) =>
                 this.orderService.openOrder(this.waiterId, tableId)),
-            mergeMap((orderResponse) => this.orderService.getAllDrinksInOrder(orderResponse.order.id).pipe(
-                    map((drinks) => ({order: orderResponse.order, drinks: drinks}))
+            mergeMap((orderResponse) => this.orderService.getTotalPriceByOrder(orderResponse.order.id).pipe(
+                map((totalPrice) => ({order: orderResponse.order, totalPrice: totalPrice}))
+            )),
+            mergeMap(({order, totalPrice}) => this.orderService.getAllDrinksInOrder(order.id).pipe(
+                    map((drinks) => ({order: order, totalPrice: totalPrice, drinks: drinks}))
                 )
             )
         )
@@ -78,14 +77,15 @@ export class OrderComponent implements OnInit {
                         this.controls.set(response.drinks[i].id, new FormControl(response.drinks[i].quantity))
                     }
                     this.order = response.order;
-                    this.drinksInOrder = response.drinks.sort((a, b) => a.id - b.id
-                    )
+                    this.drinksInOrder = response.drinks.sort((a, b) => a.id - b.id);
+                    this.totalPrice = response.totalPrice
                 },
                 error: (err) => {
                     this.message = err.error.message
                     console.error(this.message)
                 }
             })
+
 
     }
 
@@ -96,37 +96,37 @@ export class OrderComponent implements OnInit {
         } else {
             let drink: Drink = event.previousContainer.data[event.previousIndex];
             this.orderService.createDrinkInOrder(this.order!.id, drink.id, 0, this.table!.id)
-            .subscribe({
-                next: ((response) => {
-                    this.drinkInOrder = response.drinkInOrder;
-                    let qty = response.drinkInOrder.quantity;
-                    this.controls.set(response.drinkInOrder.id, new FormControl(qty));
-                    let isPresent = this.drinksInOrder.filter((el) => {
-                        return el.id == response.drinkInOrder.id;
-                    }).length > 0;
-                    console.log("DRINKS IN ORDER:");
-                    console.log(response.drinkInOrder.id)
-                    if (!isPresent) {
-                        const drinkItem = [{
-                            id: response.drinkInOrder.id,
-                            order: this.order,
-                            drink: event.previousContainer.data[event.previousIndex],
-                            quantity: qty
-                        }]
-                        transferArrayItem(
-                            drinkItem,
-                            event.container.data,
-                            event.previousIndex,
-                            event.currentIndex);
+                .subscribe({
+                    next: ((response) => {
+                        this.drinkInOrder = response.drinkInOrder;
+                        let qty = response.drinkInOrder.quantity;
+                        this.controls.set(response.drinkInOrder.id, new FormControl(qty));
+                        let isPresent = this.drinksInOrder.filter((el) => {
+                            return el.id == response.drinkInOrder.id;
+                        }).length > 0;
+                        console.log("DRINKS IN ORDER:");
+                        console.log(response.drinkInOrder.id)
+                        if (!isPresent) {
+                            const drinkItem = [{
+                                id: response.drinkInOrder.id,
+                                order: this.order,
+                                drink: event.previousContainer.data[event.previousIndex],
+                                quantity: qty
+                            }]
+                            transferArrayItem(
+                                drinkItem,
+                                event.container.data,
+                                event.previousIndex,
+                                event.currentIndex);
+                        }
+                    }),
+                    error: (err) => {
+                        this.message = err.error.message;
+                        this.drinkInOrder = err.error.drinkInOrder;
+                        console.error(this.message);
+                        this.showError();
                     }
-                }),
-                error: (err) => {
-                    this.message = err.error.message;
-                    this.drinkInOrder = err.error.drinkInOrder;
-                    console.error(this.message);
-                    this.showError();
-                }
-            })
+                })
         }
     }
 
@@ -153,8 +153,16 @@ export class OrderComponent implements OnInit {
             }
         })
 
-        this.orderService.getOrderInfo(orderId).subscribe(
-            (it) => this.orderView = it
+        this.orderService.getTotalPriceByOrder(orderId).subscribe(
+            (it) => this.totalPrice = it
+        )
+
+        this.ngOnInit();
+    }
+
+    closeOrder() {
+        this.orderService.closeOrder(this.order!.id, this.table!.id).subscribe(
+            () => this.order = undefined
         )
     }
 
