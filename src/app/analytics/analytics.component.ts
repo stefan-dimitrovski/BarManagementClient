@@ -36,7 +36,7 @@ export class AnalyticsComponent implements OnInit {
                 label: e.locale.name,
                 data: Object.values(e.employeesByMonth),
                 fill: false,
-                borderColor: datasets.length == 0 ? '#FFA726' : '#42A5F5',
+                borderColor: this.generateColor(),
                 tension: .4
             })
         });
@@ -46,4 +46,14 @@ export class AnalyticsComponent implements OnInit {
             datasets: datasets
         };
     }
+
+    generateColor() {
+        let letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
 }
