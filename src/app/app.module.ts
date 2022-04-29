@@ -41,6 +41,9 @@ import {OrderListComponent} from './order-list/order-list.component';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConfirmationService} from 'primeng/api';
 import {ChartModule} from "primeng/chart";
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from "primeng/api";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -72,8 +75,10 @@ import {ChartModule} from "primeng/chart";
         InputMaskModule,
         ConfirmDialogModule,
         ChartModule,
+        ToastModule,
+        MatButtonModule
     ],
-    providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}, ConfirmationService],
+    providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}, ConfirmationService, MessageService],
     bootstrap: [AppComponent],
 })
 export class AppModule {

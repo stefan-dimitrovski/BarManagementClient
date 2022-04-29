@@ -1,10 +1,10 @@
-import {Drink} from "./drink";
+import {Table} from "./table";
+import {Waiter} from "./waiter";
 
 export interface Order {
     id: number,
     openedAt: Date,
     closedAt: Date,
-    tableId: number,
-    waiterId: number,
-    drinks: Drink[]
+    table: Table,
+    waiter: Waiter,
 }
