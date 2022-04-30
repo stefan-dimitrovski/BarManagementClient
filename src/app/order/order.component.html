@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="drinks-container" >
+    <div class="drinks-container">
       <h2>Order number: #{{order?.id}}</h2>
       <div
         cdkDropList #doneList="cdkDropList"
@@ -46,10 +46,12 @@
             </form>
           </mat-card>
         </div>
-        <span id="total-price">Total: {{this.totalPrice}} </span>
-        <button *ngIf="drinksInOrder.length > 0 && totalPrice!=0" mat-raised-button color="primary"
-                (click)="closeOrder()">Checkout
-        </button>
+        <div class="m-3">
+          <span id="total-price">Total: {{this.totalPrice | currency: 'MKD' + ' '}} </span>
+          <button *ngIf="drinksInOrder.length > 0 && totalPrice!=0" mat-raised-button color="primary"
+                  (click)="closeOrder()">Checkout
+          </button>
+        </div>
       </div>
     </div>
   </div>

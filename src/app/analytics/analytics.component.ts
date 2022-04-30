@@ -53,14 +53,15 @@ export class AnalyticsComponent implements OnInit {
 
     defineDrinksDatasets(drinksByPopularity: any[]) {
         this.drinksData = {
-            labels: ['Margarita', 'Cosmopolitan', 'Mojito'],
+            labels: ['Beer', 'Whiskey', 'Vodka', 'Wine'],
             datasets: [
                 {
-                    data: [300, 50, 100],
+                    data: [300, 50, 100, 25],
                     backgroundColor: [
                         "#42A5F5",
                         "#66BB6A",
-                        "#FFA726"
+                        "#FFA726",
+                        "#FF4353",
                     ],
                 }
             ]
