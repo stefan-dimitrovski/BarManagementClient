@@ -28,18 +28,15 @@
       </li>
 
     </ul>
-    <div>
-      <div class="mt-3" *ngIf="!authenticated">
-        <a routerLink="/login" id="user-email" class="">
-          <p>Login</p>
-        </a>
-      </div>
-      <div class="mt-3" *ngIf="authenticated">
-        <a id="logout" (click)="logout()">
-          <p>{{ email }}</p>
-        </a>
-      </div>
+    <div class="mt-3" *ngIf="!authenticated">
+      <a routerLink="/login" id="user-email" class="">
+        <p>Login</p>
+      </a>
     </div>
-
+    <div class="mt-3" *ngIf="authenticated">
+      <a id="logout" (click)="logout()">
+        <p>{{ email }}</p>
+      </a>
+    </div>
   </div>
 </div>
