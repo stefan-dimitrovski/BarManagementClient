@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {OrderService} from "../order.service";
 import {filter, map, mergeMap, switchMap} from 'rxjs';
 import {DrinkService} from "../drink.service";
@@ -32,6 +32,7 @@ export class OrderComponent implements OnInit {
 
 
     constructor(
+        private router: Router,
         private route: ActivatedRoute,
         private orderService: OrderService,
         private drinkService: DrinkService,
@@ -160,7 +161,9 @@ export class OrderComponent implements OnInit {
 
     closeOrder() {
         this.orderService.closeOrder(this.order!.id, this.table!.id).subscribe(
-            () => this.order = undefined
+            () => {
+                this.router.navigate([`/locale/${this.order?.waiter.locale}/tables`]);
+            }
         )
     }
 
