@@ -28,7 +28,7 @@ export class OrderComponent implements OnInit {
     totalPrice: number | undefined;
     controls = new Map();
     message: string = "";
-    waiterId = +localStorage.getItem("ID")!
+    waiterId = +localStorage.getItem("ID")!;
 
 
     constructor(
@@ -104,8 +104,6 @@ export class OrderComponent implements OnInit {
                         let isPresent = this.drinksInOrder.filter((el) => {
                             return el.id == response.drinkInOrder.id;
                         }).length > 0;
-                        console.log("DRINKS IN ORDER:");
-                        console.log(response.drinkInOrder.id)
                         if (!isPresent) {
                             const drinkItem = [{
                                 id: response.drinkInOrder.id,
@@ -163,6 +161,12 @@ export class OrderComponent implements OnInit {
     closeOrder() {
         this.orderService.closeOrder(this.order!.id, this.table!.id).subscribe(
             () => this.order = undefined
+        )
+    }
+
+    onSearch(value: any) {
+        this.drinkService.searchDrinks(value).subscribe(
+            (it) => this.drinks = it
         )
     }
 

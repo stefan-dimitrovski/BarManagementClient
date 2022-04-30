@@ -9,6 +9,11 @@
         [cdkDropListConnectedTo]="[doneList]"
         class="drinks-list"
         (cdkDropListDropped)="drop($event)">
+
+        <div class="mb-3 mt-3">
+          <app-search (valueSearch)="onSearch($event)"></app-search>
+        </div>
+
         <div class="example-box" *ngFor="let drink of drinks">
           <mat-card cdkDrag class="card-box">
             <div>
@@ -22,7 +27,7 @@
       </div>
     </div>
 
-    <div class="drinks-container" >
+    <div class="drinks-container">
       <h2>Order number: #{{order?.id}}</h2>
       <div
         cdkDropList #doneList="cdkDropList"
