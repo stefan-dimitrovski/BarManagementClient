@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {OrderService} from "../order.service";
 import {filter, map, mergeMap, switchMap} from 'rxjs';
 import {DrinkService} from "../drink.service";
@@ -11,7 +11,7 @@ import {FormControl} from "@angular/forms";
 
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {DrinkInOrder} from "../domain/drink-in-order";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 
 
 @Component({
@@ -28,15 +28,18 @@ export class OrderComponent implements OnInit {
     totalPrice: number | undefined;
     controls = new Map();
     message: string = "";
-    waiterId = +localStorage.getItem("ID")!
+    waiterId = +localStorage.getItem("ID")!;
+    localeId = +localStorage.getItem("LOCALE")!;
 
 
     constructor(
+        private router: Router,
         private route: ActivatedRoute,
         private orderService: OrderService,
         private drinkService: DrinkService,
         private tableService: TableService,
         private messageService: MessageService,
+        private confirmationService: ConfirmationService,
     ) {
     }
 
@@ -104,8 +107,6 @@ export class OrderComponent implements OnInit {
                         let isPresent = this.drinksInOrder.filter((el) => {
                             return el.id == response.drinkInOrder.id;
                         }).length > 0;
-                        console.log("DRINKS IN ORDER:");
-                        console.log(response.drinkInOrder.id)
                         if (!isPresent) {
                             const drinkItem = [{
                                 id: response.drinkInOrder.id,
@@ -139,13 +140,11 @@ export class OrderComponent implements OnInit {
     }
 
     updateDrinkQuantityInOrder(drinkInOrderId: number, orderId: number) {
-        console.log(drinkInOrderId)
         let qty = this.controls.get(drinkInOrderId).value
         this.orderService.updateDrinkQuantityInOrder(drinkInOrderId, qty).pipe(
         ).subscribe({
             next: (response) => {
                 this.drinkInOrder = response
-                console.log(response)
             },
             error: (err) => {
                 this.message = err.error.message
@@ -160,10 +159,23 @@ export class OrderComponent implements OnInit {
         this.ngOnInit();
     }
 
-    closeOrder() {
+    private closeOrder() {
         this.orderService.closeOrder(this.order!.id, this.table!.id).subscribe(
-            () => this.order = undefined
+            () => {
+                this.router.navigate([`/locale/${this.localeId}/tables`]);
+            }
         )
+    }
+
+    confirm() {
+        this.confirmationService.confirm({
+            message: 'Are you sure that you want to perform this action?',
+            accept: () => {
+                this.closeOrder();
+            },
+            reject: () => {
+            }
+        });
     }
 
 

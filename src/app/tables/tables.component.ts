@@ -14,7 +14,8 @@ export class TablesComponent implements OnInit {
 
     tables: Table[] | undefined;
     tables$: Observable<Table[]> = this.tableService.getTables();
-    currentWaiterId: number | undefined;
+    waiterId = +localStorage.getItem("ID")!;
+    localeId = +localStorage.getItem("LOCALE")!;
 
     constructor(
         private tableService: TableService,
@@ -24,14 +25,12 @@ export class TablesComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.currentWaiterId = +localStorage.getItem("ID")!
         this.tables$.subscribe({
             next: (data) => {
                 this.tables = data
-                console.log(this.tables)
             },
             error: err => {
-                console.log('ERROR', err);
+                console.log('ERROR: ', err.error.message);
             }
         });
     }
@@ -40,7 +39,7 @@ export class TablesComponent implements OnInit {
         this.confirmationService.confirm({
             message: 'Are you sure that you want to perform this action?',
             accept: () => {
-                this.router.navigate([`/tables/${id}`]);
+                this.router.navigate([`/tables/${id}/orders`]);
             },
             reject: () => {
             }

@@ -84,7 +84,7 @@
 
 
       <ng-template #tableAvailable>
-        <p-badge *ngIf="table.waiter.id != currentWaiterId; else myTable"
+        <p-badge *ngIf="table.waiter.id != waiterId; else myTable"
                  styleClass="mr-2"
                  disabled="true"
                  severity="danger"
@@ -95,7 +95,7 @@
         ></p-badge>
 
         <ng-template #myTable>
-          <a routerLink="/tables/{{ table.id }}">
+          <a routerLink="/tables/{{ table.id }}/orders">
             <button
               id="my-table"
               pButton

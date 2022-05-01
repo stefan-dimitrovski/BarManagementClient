@@ -27,11 +27,6 @@ const routes: Routes = [
         }
     },
     {
-        path: 'orders', component: OrderComponent, canActivate: [AuthGuard], data: {
-            role: 'WAITER'
-        }
-    },
-    {
         path: 'order-list', component: OrderListComponent, canActivate: [AuthGuard], data: {
             role: 'MANAGER'
         }
@@ -52,7 +47,7 @@ const routes: Routes = [
         }
     },
     {
-        path: 'tables/:tableId', component: OrderComponent, canActivate: [AuthGuard], data: {
+        path: 'tables/:tableId/orders', component: OrderComponent, canActivate: [AuthGuard], data: {
             role: ['WAITER', 'MANAGER']
         }
     },
