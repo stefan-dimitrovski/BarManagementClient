@@ -1,0 +1,24 @@
+#locales {
+  margin-left: 5em;
+  margin-right: 2em;
+  margin-top: 1em;
+  width: 25%;
+}
+
+.map-container {
+  height: 85vh;
+  min-width: 600px;
+  width: 100%;
+  position: relative;
+  margin-top: 1em;
+  margin-right: 5em;
+}
+
+.map-frame {
+  border: 2px solid black;
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}

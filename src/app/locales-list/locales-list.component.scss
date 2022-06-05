@@ -1,0 +1,21 @@
+.locale {
+  text-decoration: none;
+  color: black;
+}
+
+.locale-div:hover {
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+#locale-text-address {
+  font-weight: bold;
+}
+
+#btn-locale {
+  float: right;
+}
+
+#icon {
+  font-size: 1rem;
+}

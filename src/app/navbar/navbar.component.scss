@@ -1,0 +1,40 @@
+.nav-link:hover {
+  background-color: darkgrey;
+  border-radius: 5%;
+}
+
+.text-small {
+  font-size: 85%;
+}
+
+#user-email {
+  color: white;
+  text-decoration: none;
+}
+
+#user-email:hover {
+  text-decoration: underline;
+}
+
+#logout {
+  color: white;
+  text-decoration: none;
+}
+
+#logout:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.active-link {
+  background-color: grey;
+  border-radius: 5%;
+}
+
+.icon-size {
+  font-size: 1.5rem;
+}
+
+.reversed {
+  flex-direction: row-reverse;
+}

@@ -1,0 +1,122 @@
+<div class="container mt-5">
+  <img src="../../assets/images/bar-layout.jpg" alt="Tables layout">
+  <div *ngFor="let table of tables">
+    <div id="t1" *ngIf="table.id == 1">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t2" *ngIf="table.id == 2">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t3" *ngIf="table.id == 3">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t4" *ngIf="table.id == 4">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t5" *ngIf="table.id == 5">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t6" *ngIf="table.id == 6">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t7" *ngIf="table.id == 7">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t8" *ngIf="table.id == 8">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t9" *ngIf="table.id == 9">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t10" *ngIf="table.id == 10">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t11" *ngIf="table.id == 11">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t12" *ngIf="table.id == 12">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <div id="t13" *ngIf="table.id == 13">
+      <ng-template
+        *ngTemplateOutlet="tableAvailability; context: { $implicit: table }"
+      ></ng-template>
+    </div>
+    <ng-template #tableAvailability let-table>
+
+      <div *ngIf="table.waiter == null; else tableAvailable">
+        <button
+          (click)="confirm(table.id)"
+          pButton
+          pRipple
+          type="button"
+          label="T{{ table.id }}"
+          class="btn p-button-rounded p-button-secondary p-button-sm"
+          tooltipPosition="top"
+          pTooltip="Table available"
+        >
+        </button>
+      </div>
+
+
+      <ng-template #tableAvailable>
+        <p-badge *ngIf="table.waiter.id != currentWaiterId; else myTable"
+                 styleClass="mr-2"
+                 disabled="true"
+                 severity="danger"
+                 size="medium"
+                 value="T{{ table.id }}"
+                 tooltipPosition="top"
+                 pTooltip="Table served by: {{table.waiter.name}}"
+        ></p-badge>
+
+        <ng-template #myTable>
+          <a routerLink="/tables/{{ table.id }}">
+            <button
+              id="my-table"
+              pButton
+              pRipple
+              type="button"
+              label="T{{ table.id }}"
+              class="btn p-button-rounded p-button-success p-button-sm"
+              tooltipPosition="top"
+              pTooltip="Served by: Me"
+            ></button>
+          </a>
+        </ng-template>
+
+      </ng-template>
+
+    </ng-template>
+
+  </div>
+
+</div>
+
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+

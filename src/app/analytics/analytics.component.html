@@ -1,0 +1,11 @@
+<div id="charts" class="d-flex mt-3">
+  <ng-container *ngIf="isLoading">
+    <p-progressSpinner></p-progressSpinner>
+  </ng-container>
+  <div class="w-50">
+    <p-chart type="line" [data]="employeeData"></p-chart>
+  </div>
+  <div class="w-25">
+    <p-chart type="pie" [data]="drinksData"></p-chart>
+  </div>
+</div>
